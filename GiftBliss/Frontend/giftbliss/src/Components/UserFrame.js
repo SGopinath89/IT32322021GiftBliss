@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import "./UserFrame.css";
+import "../CSS/UserFrame.css";
 import UserHeader from "./UserHeader";
-import Footer from './Footer';
-import PersonalDetails from "./PersonalDetails";
+//import Footer from '../CSS/Footer';
+//import PersonalDetails from "./PersonalDetails";
 
 const UserFrame = () => {
   const navigate = useNavigate();
@@ -29,12 +29,10 @@ const UserFrame = () => {
       <UserHeader />
       <div className="content">
         <div className="details">
-          <div className="menu-item" onClick={() => navigateTo("./PersonalDetails")}>Personal Details
-           
-          </div>
-          <div className="menu-item" onClick={() => navigateTo("./Payment")}>Payment Methods</div>
-          <div className="menu-item"  onClick={() => navigateTo("./OrderHistory")}>Your Orders</div>
-          <div className="menu-item" onClick={() => navigateTo("./ManageAddress")}>Manage Address</div>
+        <div className="menu-item" onClick={onPersonalDetailsTextClick}>Personal Details</div>
+          <div className="menu-item" onClick={onPaymentMethodsTextClick}>Payment Methods</div>
+          <div className="menu-item" onClick={onYourOrdersTextClick}>Your Orders</div>
+          <div className="menu-item" onClick={onManageAddressTextClick}>Manage Address</div>
           <div className="menu-item">Log Out</div>
           
         </div>
@@ -46,7 +44,7 @@ const UserFrame = () => {
           />
         </div>
       </div>
-      <Footer />
+     
     </div>
   );
 };

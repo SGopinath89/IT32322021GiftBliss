@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaSearch } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-import './UserHeader.css'
+import '../CSS/UserHeader.css';
 
 const UserHeader = () => {
   const userName = "Sajath Muhamath"; // example user name
