@@ -33,11 +33,9 @@ const PersonalDetails = () => {
           <div className="personal-info">
           <img className="info-icon" alt="Personal data icon" src="../images/main.png" />
             <div className="user-name">Sajath Muhamath</div>
-            <div className="phra">
             <p>Email: sajath@gmail.com</p>
             <p>Contact number: 0765692018</p>
             <p>Address: Boys Hostel, University of Vavuniya</p>
-            </div>
           </div>
         </div>
       </div>
