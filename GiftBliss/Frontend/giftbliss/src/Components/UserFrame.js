@@ -44,7 +44,7 @@ const UserFrame = () => {
           />
         </div>
       </div>
-     
+     <Footer/>
     </div>
   );
 };

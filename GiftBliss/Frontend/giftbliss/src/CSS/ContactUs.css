@@ -1,0 +1,141 @@
+/* ContactUs.css */
+
+.contact-us {
+    width: 100%;
+    position: relative;
+    background-color: var(--color-white);
+    overflow: hidden;
+    text-align: center;
+    font-size: var(--font-size-xl);
+    color: var(--color-black);
+    font-family: var(--font-pt-serif-caption);
+    padding: 20px;
+  }
+  
+  
+  
+  .contact-main {
+    padding: 20px;
+    border-bottom: none; /* Add this line to remove the border */
+  }
+  
+  
+  .contact-info {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+    background-color: #C5D5EC; /* Change to your desired background color */
+    /* Or use a background image */
+    /* background-image: url('path/to/your/image.jpg'); */
+    background-size: cover; 
+    /* background-repeat: no-repeat; */
+    /* background-position: center; */
+   height: 300px;
+   width: 100%;
+  }
+  
+  
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+    margin: 20px 0;
+    margin-top: 90px;
+  }
+  
+  .icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+  }
+  
+  .contact-details {
+    text-align: center;
+  }
+  
+  .label {
+    font-weight: bold;
+  }
+  
+  .detail {
+    margin-top: 5px;
+    font-size: var(--font-size-l);
+  }
+  
+  .contact-form {
+    background-color: var(--color-lightsteelblue-200);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+  }
+  
+  .form-title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 15px auto;
+  }
+  
+  .form-label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  .textarea-input {
+    height: 150px; /* Adjust the height value as needed */
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  
+  .submit-button {
+    background-color: rgba(9, 132, 227, 0.52);
+    color: var(--color-white);
+    border: none;
+    border-radius: 999px;
+    padding: 15px 30px;
+    cursor: pointer;
+    font-size: var(--font-size-l);
+    font-weight: bold;
+    margin-top: 20px;
+    box-shadow: 0 2px 4px rgba(136, 144, 194, 0.2),
+                0 5px 15px rgba(37, 44, 97, 0.15);
+  }
+  
+  .submit-button:hover {
+    background-color: rgba(9, 132, 227, 0.72);
+  }
+  
+  .contact-message {
+    margin: 40px 0;
+    text-align: center;
+  }
+  
+  .connect-title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: 20px;
+  }
+  
+  .connect-description {
+    font-size: var(--font-size-l);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
