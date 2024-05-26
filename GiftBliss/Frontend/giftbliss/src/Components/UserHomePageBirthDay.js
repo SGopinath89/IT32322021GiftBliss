@@ -1,5 +1,5 @@
 import React from 'react';
-import '../CSS/UserHomePage.css';
+import './UserHomePage.css';
 import Header from './Header';
 import Footer from './Footer';
 
@@ -13,7 +13,7 @@ const categories = [
   { image: '../images/Fsshion.jpg', title: 'Fashion' },
 ];
 
-const UserHomePage = () => {
+const UserHomePageBirthday = () => {
   return (
     <div className="homepage">
        <Header/>
@@ -37,4 +37,4 @@ const UserHomePage = () => {
   );
 };
 
-export default UserHomePage;
+export default UserHomePageBirthday;
