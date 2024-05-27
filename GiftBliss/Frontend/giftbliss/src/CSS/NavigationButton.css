@@ -1,0 +1,17 @@
+/* NavigationButton.css */
+.navigation-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .navigation-button:hover {
+    background-color: #0056b3;
+  }

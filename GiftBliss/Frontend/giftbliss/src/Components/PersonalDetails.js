@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import "../CSS/PersonalDetails.css";
-import Footer from "./Footer";
-import Header from "./Header";
-import UserHeader from "./UserHeader";
+//import Footer from "./Footer";
+//import Header from "./Header";
+import UserHeader from './UserHeader';
 
 const PersonalDetails = () => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const PersonalDetails = () => {
   return (
     <div className="personal-details">
  
-      <UserHeader />
+      <UserHeader/>
       
       <div className="content-wrapper">
         <div className="left-side">
@@ -40,7 +40,7 @@ const PersonalDetails = () => {
         </div>
       </div>
       
-      <Footer />
+      
     </div>
   );
 };
