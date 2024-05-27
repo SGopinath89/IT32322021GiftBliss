@@ -8,14 +8,14 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 //import HomePage from './components/HomePage';
 //import ContactUs from './components/ContactUs';
 //import AboutUs from './components/AboutUs';
-import UserFrame from './Components/UserFrame';
-//import PersonalDetails from './Components/PersonalDetails';
+//import UserFrame from './Components/UserFrame';
+import PersonalDetails from './Components/PersonalDetails';
 
 const App = () => {
   return (
     <Router>
       <Routes>
-      <Route path="/" element={<UserFrame/>} />
+      <Route path="/" element={<PersonalDetails/>} />
       
         
         
