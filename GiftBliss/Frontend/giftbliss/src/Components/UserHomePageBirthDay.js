@@ -1,6 +1,6 @@
 import React from 'react';
 import '../CSS/UserHomePage.css';
-import Header from './Header';
+import UserHeader from './UserHeader';
 import Footer from './Footer';
 
 
@@ -16,7 +16,7 @@ const categories = [
 const UserHomePageBirthday = () => {
   return (
     <div className="homepage">
-       <Header/>
+       <UserHeader/>
       <div className="banner">
       <img src='../images/main.png' alt=" " style={{ width: '100%', height: '650px' }}/>
       </div>
