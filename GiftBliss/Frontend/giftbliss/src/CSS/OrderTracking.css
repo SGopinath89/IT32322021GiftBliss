@@ -1,0 +1,141 @@
+.order-tracking {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 600px;
+  cursor: pointer;
+}
+
+.details-column {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.item-ref {
+  font-size: 14px;
+  color: #555;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.order-status {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+.status-step {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+  position: relative; /* Add this to position the vertical line */
+}
+
+.time {
+  color: #999;
+  font-size: 12px;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+}
+
+.image-column {
+  width: 100px;
+  height: 100px;
+}
+
+.image-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.order-detils {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  margin: 20px 0;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  position: relative;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+.sp {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.vertical-line {
+  position: absolute;
+  margin-left: 15px;
+  margin-top: -11.9%;
+  top:0 ;
+  height: 116px; /* Adjust this value to match the spacing between status steps */
+  width: 3px; /* 10px wide */
+  background-color: #000;
+  transform: translateX(-50%);
+}
