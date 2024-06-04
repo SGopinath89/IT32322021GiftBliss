@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import "./OrderTracking.css";
+import "../CSS/OrderTracking.css";
 import NavigationButton from "./NavigationButton";
 import UserHeader from "./UserHeader";
 import Footer from "./Footer";

@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import "./OrderHistory.css";
+import "../CSS/OrderHistory.css";
 import UserHeader from './UserHeader';
 import Footer from './Footer'
 import NavigationButton from "./NavigationButton";

@@ -1,0 +1,298 @@
+.dashboard-container .Heading p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.sidebar {
+  position: absolute;
+  top: 195px; /* Adjust this value based on your header's height */
+  left: 0;
+  background-color: #f4f4f4;
+  width: 200px;
+}
+
+.content {
+  margin-left: 220px; /* Adjust margin to accommodate the sidebar width and some spacing */
+  padding: 20px;
+  display: flex; /* Add flex display to align tables side by side */
+}
+
+.table-section {
+  flex: 1; /* Make each table section take up equal space */
+  margin-right: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.menu-item {
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 16px;
+  margin-top: 40px;
+  margin-left: 40px;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.Heading {
+  margin-left: -750px;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.select {
+  color: blue;
+}
+
+.dashboard-container .dashboard-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.dashboard-container .dashboard-title .select {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px; /* Adjust margin as needed */
+}
+
+.graph-section {
+  width: 100%; /* Adjust width as needed */
+  margin-top: 20px; /* Adjust margin as needed */
+  flex: 1; 
+  display: flex;
+  justify-content: space-between; /* Space out the bar graphs */
+  align-items: center;
+}
+
+.graph-section canvas {
+  height: auto;
+  margin-left: 200px;
+  margin-right: 250px;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dashboard-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.table-section {
+  width: 100%; /* Adjust the width as needed */
+  flex: 1; /* Make each table section take up equal space */
+  margin-right: 20px; /* Add some spacing between the tables */
+  margin-left: 20px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.Table {
+  margin-left: 200px;
+  width: 100%;
+  display: flex; 
+}
+
+.bar-section {
+  width: 100%; /* Adjust width as needed */
+  margin-top: 20px; /* Adjust margin as needed */
+  flex: 1; 
+  margin-left: 220px;
+}
+
+.line-graph {
+  width: 90%; /* Adjust this value to increase the width */
+  margin-left: 150px; /* Adjust as needed */
+  margin-top: 10px;
+  align-items: center;
+}
+
+/* Add any other styling as needed */
+
+.bar-graph,
+.line-graph {
+  flex: 1; /* Make each graph section take up equal space */
+  align-items: center;
+}
+.line-graph h4 {
+  margin-left: 200px;
+}
+
+/* Adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+  .dashboard-container .Heading {
+    margin-left: 0; /* Remove left margin */
+    text-align: center; /* Center-align the heading */
+  }
+
+  .sidebar {
+    position: static; /* Remove absolute positioning */
+    width: 100%; /* Occupy full width */
+    margin-top: 20px; /* Add margin from the top */
+  }
+
+  .content {
+    margin-left: 0; /* Remove left margin */
+    flex-direction: column; /* Stack content vertically */
+    align-items: center; /* Center-align content */
+  }
+
+  
+
+  .graph-section canvas {
+    margin-left: 0; /* Remove left margin */
+    margin-right: 0; /* Remove right margin */
+    width: 100%; /* Occupy full width */
+    height: auto; /* Auto-adjust height */
+  }
+
+  .Table {
+    flex-direction: column; /* Stack tables vertically */
+    align-items: center; /* Center-align tables */
+    margin-left: 0; /* Remove left margin */
+  }
+
+  .table-section {
+    margin-right: 0; /* Remove right margin */
+    margin-left: 0; /* Remove left margin */
+    margin-top: 20px; /* Add margin from the top */
+    margin-bottom: 20px;
+  }
+
+  .line-graph h4 {
+    margin-left: 0; /* Remove left margin */
+    text-align: center; /* Center-align the heading */
+  }
+}
+
+
+
+
+.graph-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.bar-graph {
+  flex: 1;
+  max-width: 300px;
+}
+
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+
+
+.column-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 80%;
+  margin-bottom: 20px;
+  margin-left: 250px;
+  margin-right: 0px;
+}
+
+.column-graph {
+  flex: 1;
+  max-width: 300px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  text-align: center;
+}
+
+.column-graph p {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #333;
+  text-align: left;
+}
+
+.column-graph i {
+  color: #007bff;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+
+.line-graph {
+  width: 100%;
+  height: 500px;
+}
+.icon {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+  border-radius: 30px;
+}.column-graph p .icon {
+  float: right; /* Float the image to the right */
+  margin-left: 10px; /* Add some margin between the text and the image */
+  margin-top: -40px;
+  margin-right: 10px;
+}
+.ic {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 10px;
+}.column-graph  .ic{
+  margin-top: 20px;
+  
+  margin-right: 10px;
+}
