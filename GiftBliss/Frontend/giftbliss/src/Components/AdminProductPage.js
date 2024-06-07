@@ -6,6 +6,9 @@ import { Line, Bar } from 'react-chartjs-2';
 import UserHeader from './UserHeader';
 import "../CSS/AdminProductPage.css";
 import Footer from "./Footer";
+import { MdEdit, MdOutlineShoppingCart } from "react-icons/md";
+import { RiDeleteBin6Line } from "react-icons/ri";
+
 
 Chart.register(CategoryScale, LinearScale, LineController, BarController, PointElement, LineElement, BarElement, Title, Legend, Tooltip);
 
@@ -223,7 +226,10 @@ const AdminProductPage = () => {
                 <td>{item.stockStatus}</td>
                 <td>{item.price}</td>
                 <td>{item.date}</td>
-                <td>{item.action}</td>
+                <td>
+                 <MdEdit onClick={()=>handleEditClick(item.orderId)} style={{cursor: 'pointer', marginRight: '10px'}}/>
+                 <RiDeleteBin6Line onClick={() => handleDeleteClick(item.orderId)} style={{ cursor: 'pointer', color: 'red' }}/>
+                </td>
               </tr>
             ))}
           </tbody>

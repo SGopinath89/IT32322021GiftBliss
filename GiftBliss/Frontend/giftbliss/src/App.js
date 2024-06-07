@@ -11,12 +11,13 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 //import UserFrame from './Components/UserFrame';
 //import PersonalDetails from './Components/PersonalDetails';
 //import Dashboard from './Components/Dashboard';
-import AdminProductPage from './Components/AdminProductPage';
+//import AdminProductPage from './Components/AdminProductPage';
+import AdminCustomerPage from './Components/AdminCustomerPage';
 const App = () => {
   return (
     <Router>
       <Routes>
-      <Route path="/" element={<AdminProductPage/>} />
+      <Route path="/" element={<AdminCustomerPage/>} />
       
         
         
