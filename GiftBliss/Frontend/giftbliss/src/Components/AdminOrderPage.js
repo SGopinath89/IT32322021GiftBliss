@@ -11,57 +11,57 @@ Chart.register(CategoryScale, LinearScale, LineController, BarController, PointE
 
 const AdminOrderPage = () => {
   const AllData = [
-    { orderId: 1, customer: "John", total: "$100", date: "2024-06-01", type: "Online Order", status: "In Progress", action: "Edit" },
-    { orderId: 2, customer: "Jane", total: "$150", date: "2024-06-02", type: "Online Order", status: "Pending", action: "Edit" },
-    { orderId: 3, customer: "Mike", total: "$200", date: "2024-06-03", type: "Online Order", status: "Shipped", action: "Edit" },
-    { orderId: 4, customer: "Anna", total: "$250", date: "2024-06-04", type: "Online Order", status: "In Progress", action: "Edit" },
-    { orderId: 5, customer: "David", total: "$300", date: "2024-06-05", type: "Online Order", status: "Pending", action: "Edit" },
-    { orderId: 6, customer: "Eva", total: "$100", date: "2024-06-06", type: "Online Order", status: "Shipped", action: "Edit" },
-    { orderId: 7, customer: "Chris", total: "$130", date: "2024-06-07", type: "Online Order", status: "In Progress", action: "Edit" },
-    { orderId: 8, customer: "Paul", total: "$170", date: "2024-06-08", type: "Online Order", status: "Pending", action: "Edit" },
-    { orderId: 9, customer: "Sarah", total: "$220", date: "2024-06-09", type: "Online Order", status: "Shipped", action: "Edit" },
-    { orderId: 10, customer: "Tom", total: "$190", date: "2024-06-10", type: "Online Order", status: "In Progress", action: "Edit" },
-    { orderId: 11, customer: "Lucy", total: "$140", date: "2024-06-11", type: "Online Order", status: "Pending", action: "Edit" },
-    { orderId: 12, customer: "Steve", total: "$210", date: "2024-06-12", type: "Online Order", status: "Shipped", action: "Edit" },
-    { orderId: 13, customer: "Linda", total: "$240", date: "2024-06-13", type: "Online Order", status: "In Progress", action: "Edit" },
-    { orderId: 14, customer: "Harry", total: "$260", date: "2024-06-14", type: "Online Order", status: "Pending", action: "Edit" },
-    { orderId: 15, customer: "Noah", total: "$350", date: "2024-06-15", type: "Online Order", status: "Shipped", action: "Edit" }
+    { orderId: 1, customer: "John", total: "$100", date: "2024-06-01", type: "Online Order", status: "In Progress", action: "View" },
+    { orderId: 2, customer: "Jane", total: "$150", date: "2024-06-02", type: "Online Order", status: "Pending", action: "View" },
+    { orderId: 3, customer: "Mike", total: "$200", date: "2024-06-03", type: "Online Order", status: "Shipped", action: "View" },
+    { orderId: 4, customer: "Anna", total: "$250", date: "2024-06-04", type: "Online Order", status: "In Progress", action: "View" },
+    { orderId: 5, customer: "David", total: "$300", date: "2024-06-05", type: "Online Order", status: "Pending", action: "View" },
+    { orderId: 6, customer: "Eva", total: "$100", date: "2024-06-06", type: "Online Order", status: "Shipped", action: "View" },
+    { orderId: 7, customer: "Chris", total: "$130", date: "2024-06-07", type: "Online Order", status: "In Progress", action: "View" },
+    { orderId: 8, customer: "Paul", total: "$170", date: "2024-06-08", type: "Online Order", status: "Pending", action: "View" },
+    { orderId: 9, customer: "Sarah", total: "$220", date: "2024-06-09", type: "Online Order", status: "Shipped", action: "View" },
+    { orderId: 10, customer: "Tom", total: "$190", date: "2024-06-10", type: "Online Order", status: "In Progress", action: "View" },
+    { orderId: 11, customer: "Lucy", total: "$140", date: "2024-06-11", type: "Online Order", status: "Pending", action: "View" },
+    { orderId: 12, customer: "Steve", total: "$210", date: "2024-06-12", type: "Online Order", status: "Shipped", action: "View" },
+    { orderId: 13, customer: "Linda", total: "$240", date: "2024-06-13", type: "Online Order", status: "In Progress", action: "View" },
+    { orderId: 14, customer: "Harry", total: "$260", date: "2024-06-14", type: "Online Order", status: "Pending", action: "View" },
+    { orderId: 15, customer: "Noah", total: "$350", date: "2024-06-15", type: "Online Order", status: "Shipped", action: "View" }
 ];
 
 const PendingData = [
-    { orderId: 16, customer: "Alice", total: "$160", date: "2024-06-16", type: "Online Order", status: "Pending", action: "Edit" },
-    { orderId: 17, customer: "Oscar", total: "$170", date: "2024-06-17", type: "Online Order", status: "In Progress", action: "Edit" },
-    { orderId: 18, customer: "Emily", total: "$180", date: "2024-06-18", type: "Online Order", status: "Pending", action: "Edit" },
-    { orderId: 19, customer: "Liam", total: "$190", date: "2024-06-19", type: "Online Order", status: "In Progress", action: "Edit" },
-    { orderId: 20, customer: "Sophia", total: "$200", date: "2024-06-20", type: "Online Order", status: "Pending", action: "Edit" },
-    { orderId: 21, customer: "James", total: "$210", date: "2024-06-21", type: "Online Order", status: "In Progress", action: "Edit" },
-    { orderId: 22, customer: "Olivia", total: "$220", date: "2024-06-22", type: "Online Order", status: "Pending", action: "Edit" },
-    { orderId: 23, customer: "Mason", total: "$230", date: "2024-06-23", type: "Online Order", status: "In Progress", action: "Edit" },
-    { orderId: 24, customer: "Ava", total: "$240", date: "2024-06-24", type: "Online Order", status: "Pending", action: "Edit" },
-    { orderId: 25, customer: "Lucas", total: "$250", date: "2024-06-25", type: "Online Order", status: "In Progress", action: "Edit" },
-    { orderId: 26, customer: "Mia", total: "$260", date: "2024-06-26", type: "Online Order", status: "Pending", action: "Edit" },
-    { orderId: 27, customer: "Ethan", total: "$270", date: "2024-06-27", type: "Online Order", status: "In Progress", action: "Edit" },
-    { orderId: 28, customer: "Amelia", total: "$280", date: "2024-06-28", type: "Online Order", status: "Pending", action: "Edit" },
-    { orderId: 29, customer: "Logan", total: "$290", date: "2024-06-29", type: "Online Order", status: "In Progress", action: "Edit" },
-    { orderId: 30, customer: "Zoe", total: "$300", date: "2024-06-30", type: "Online Order", status: "In Progress", action: "Edit" }
+    { orderId: 16, customer: "Alice", total: "$160", date: "2024-06-16", type: "Online Order", status: "Pending", action: "View" },
+    { orderId: 17, customer: "Oscar", total: "$170", date: "2024-06-17", type: "Online Order", status: "In Progress", action: "View" },
+    { orderId: 18, customer: "Emily", total: "$180", date: "2024-06-18", type: "Online Order", status: "Pending", action: "View" },
+    { orderId: 19, customer: "Liam", total: "$190", date: "2024-06-19", type: "Online Order", status: "In Progress", action: "View" },
+    { orderId: 20, customer: "Sophia", total: "$200", date: "2024-06-20", type: "Online Order", status: "Pending", action: "View" },
+    { orderId: 21, customer: "James", total: "$210", date: "2024-06-21", type: "Online Order", status: "In Progress", action: "View" },
+    { orderId: 22, customer: "Olivia", total: "$220", date: "2024-06-22", type: "Online Order", status: "Pending", action: "View" },
+    { orderId: 23, customer: "Mason", total: "$230", date: "2024-06-23", type: "Online Order", status: "In Progress", action: "View" },
+    { orderId: 24, customer: "Ava", total: "$240", date: "2024-06-24", type: "Online Order", status: "Pending", action: "View" },
+    { orderId: 25, customer: "Lucas", total: "$250", date: "2024-06-25", type: "Online Order", status: "In Progress", action: "View" },
+    { orderId: 26, customer: "Mia", total: "$260", date: "2024-06-26", type: "Online Order", status: "Pending", action: "View" },
+    { orderId: 27, customer: "Ethan", total: "$270", date: "2024-06-27", type: "Online Order", status: "In Progress", action: "View" },
+    { orderId: 28, customer: "Amelia", total: "$280", date: "2024-06-28", type: "Online Order", status: "Pending", action: "View" },
+    { orderId: 29, customer: "Logan", total: "$290", date: "2024-06-29", type: "Online Order", status: "In Progress", action: "View" },
+    { orderId: 30, customer: "Zoe", total: "$300", date: "2024-06-30", type: "Online Order", status: "In Progress", action: "View" }
 ];
 
 const ReturnsData = [
-    { orderId: 31, customer: "Bob", total: "$310", date: "2024-07-01", type: "Online Order", status: "In Progress", action: "Edit" },
-    { orderId: 32, customer: "Sam", total: "$320", date: "2024-07-02", type: "Online Order", status: "Pending", action: "Edit" },
-    { orderId: 33, customer: "Kate", total: "$330", date: "2024-07-03", type: "Online Order", status: "In Progress", action: "Edit" },
-    { orderId: 34, customer: "Alex", total: "$340", date: "2024-07-04", type: "Online Order", status: "Pending", action: "Edit" },
-    { orderId: 35, customer: "Ella", total: "$350", date: "2024-07-05", type: "Online Order", status: "In Progress", action: "Edit" },
-    { orderId: 36, customer: "Henry", total: "$360", date: "2024-07-06", type: "Online Order", status: "Pending", action: "Edit" },
-    { orderId: 37, customer: "Grace", total: "$370", date: "2024-07-07", type: "Online Order", status: "In Progress", action: "Edit" },
-    { orderId: 38, customer: "Max", total: "$380", date: "2024-07-08", type: "Online Order", status: "Pending", action: "Edit" },
-    { orderId: 39, customer: "Hannah", total: "$390", date: "2024-07-09", type: "Online Order", status: "In Progress", action: "Edit" },
-    { orderId: 40, customer: "Ryan", total: "$400", date: "2024-07-10", type: "Online Order", status: "Pending", action: "Edit" },
-    { orderId: 41, customer: "Abby", total: "$410", date: "2024-07-11", type: "Online Order", status: "In Progress", action: "Edit" },
-    { orderId: 42, customer: "Lily", total: "$420", date: "2024-07-12", type: "Online Order", status: "Pending", action: "Edit" },
-    { orderId: 43, customer: "Jack", total: "$430", date: "2024-07-13", type: "Online Order", status: "In Progress", action: "Edit" },
-    { orderId: 44, customer: "Sophia", total: "$440", date: "2024-07-14", type: "Online Order", status: "Pending", action: "Edit" },
-    { orderId: 45, customer: "William", total: "$450", date: "2024-07-15", type: "Online Order", status: "Shipped", action: "Edit" }
+    { orderId: 31, customer: "Bob", total: "$310", date: "2024-07-01", type: "Online Order", status: "In Progress", action: "View" },
+    { orderId: 32, customer: "Sam", total: "$320", date: "2024-07-02", type: "Online Order", status: "Pending", action: "View" },
+    { orderId: 33, customer: "Kate", total: "$330", date: "2024-07-03", type: "Online Order", status: "In Progress", action: "View" },
+    { orderId: 34, customer: "Alex", total: "$340", date: "2024-07-04", type: "Online Order", status: "Pending", action: "View" },
+    { orderId: 35, customer: "Ella", total: "$350", date: "2024-07-05", type: "Online Order", status: "In Progress", action: "View" },
+    { orderId: 36, customer: "Henry", total: "$360", date: "2024-07-06", type: "Online Order", status: "Pending", action: "View" },
+    { orderId: 37, customer: "Grace", total: "$370", date: "2024-07-07", type: "Online Order", status: "In Progress", action: "View" },
+    { orderId: 38, customer: "Max", total: "$380", date: "2024-07-08", type: "Online Order", status: "Pending", action: "View" },
+    { orderId: 39, customer: "Hannah", total: "$390", date: "2024-07-09", type: "Online Order", status: "In Progress", action: "View" },
+    { orderId: 40, customer: "Ryan", total: "$400", date: "2024-07-10", type: "Online Order", status: "Pending", action: "View" },
+    { orderId: 41, customer: "Abby", total: "$410", date: "2024-07-11", type: "Online Order", status: "In Progress", action: "View" },
+    { orderId: 42, customer: "Lily", total: "$420", date: "2024-07-12", type: "Online Order", status: "Pending", action: "View" },
+    { orderId: 43, customer: "Jack", total: "$430", date: "2024-07-13", type: "Online Order", status: "In Progress", action: "View" },
+    { orderId: 44, customer: "Sophia", total: "$440", date: "2024-07-14", type: "Online Order", status: "Pending", action: "View" },
+    { orderId: 45, customer: "William", total: "$450", date: "2024-07-15", type: "Online Order", status: "Shipped", action: "View" }
 ];
 
 
@@ -160,6 +160,17 @@ const ReturnsData = [
     }
     return pageNumbers;
   };
+  
+  const handleEditClick = (orderId) => {
+    // Handle edit logic, for example, navigate to edit page
+    navigate(`/edit/${orderId}`);
+  };
+
+  const handleDeleteClick = (orderId) => {
+    // Handle delete logic, for example, update state to remove the item
+    setDetailsData(DetailsData.filter(item => item.orderId !== orderId));
+  };
+
 
   return (
     <div className="Product-container">
