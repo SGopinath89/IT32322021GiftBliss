@@ -1,25 +1,19 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-//import UserHomePageBirthday from './Components/UserHomePageBirthDay';
-//import HomePage from './components/HomePage';
-//import Header from './components/Header';
-//import Footer from './components/Footer';
-//import PersonalDetails from './components/PersonalDetails';
-//import HomePage from './components/HomePage';
-//import ContactUs from './components/ContactUs';
-//import AboutUs from './components/AboutUs';
-//import UserFrame from './Components/UserFrame';
-//import PersonalDetails from './Components/PersonalDetails';
-//import Dashboard from './Components/Dashboard';
-import AdminProductPage from './Components/AdminProductPage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './Components/HomePage';
+import CategoryPage from './Components/CategoryPage';
+import './CSS/HomePage.css';
+import './CSS/UserHeader.css';
+import './CSS/Footer.css';
+
+
 const App = () => {
   return (
     <Router>
       <Routes>
-      <Route path="/" element={<AdminProductPage/>} />
-      
-        
-        
+        <Route path="/" element={<HomePage />} />
+        <Route path="/:category" element={<CategoryPage />} />
+        <Route path="/:category/:subcategory" element={<CategoryPage />} />
       </Routes>
     </Router>
   );
