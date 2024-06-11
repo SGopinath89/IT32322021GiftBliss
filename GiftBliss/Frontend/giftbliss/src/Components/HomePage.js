@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../CSS/HomePage.css';
 import Footer from './Footer';
-import Header from './UserHeader';
+import UserHeader from './UserHeader';
+
 
 const categories = [
   { image: '../images/Categories/books.avif', title: 'Books & Stationery', path: 'books' },
@@ -16,7 +17,7 @@ const categories = [
 const HomePage = () => {
   return (
     <div className="homepage">
-      <Header />
+      <UserHeader/>
       <div className="banner">
         <img src="../images/main.png" alt="Banner" style={{ width: '100%', height: '650px' }} />
       </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import '../CSS/CategoryPage.css';
 import Footer from './Footer';
-import Header from './UserHeader';
+import UserHeader from './UserHeader';
 
 const subcategoryImages = {
   art: [
@@ -391,7 +391,7 @@ const CategoryPage = () => {
 
   return (
     <div className="homepage">
-      <Header />
+      <UserHeader/>
       
       <div className="category-section">
         <h2>{(isSubcategory ? subcategory : category).replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}</h2>
