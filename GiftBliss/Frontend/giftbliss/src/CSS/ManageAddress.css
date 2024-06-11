@@ -1,0 +1,136 @@
+.Address-details {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .content-wrapper {
+    display: flex;
+    flex-grow: 1;
+    padding: 0px;
+    width: 100%;
+  }
+  
+  .left-side {
+    flex: 1;
+    max-width: 250px;
+    background-color: #f8f9fa;
+    padding-top: 10px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    height: auto;
+    position: sticky;
+    top: 50px;
+  }
+  
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .action-item {
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 16px;
+    margin-top: 40px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .action-item:hover {
+    background-color: #0056b3;
+    color: #ffffff;
+  }
+  
+  .right-side {
+    flex: 2;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .info-icon {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+    margin-top: -20%;
+    border-radius: 50px;
+    border: 5px solid #e5e6e8;
+  }
+  
+  .personal-info {
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .personal-info p {
+    margin: 10px 0;
+  }
+  
+  .user-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  footer {
+    padding: 0;
+    text-align: center;
+    width: 100%;
+    margin-top: 0;
+  }
+  
+  .Address {
+    margin-bottom: 20px;
+  }
+  
+  .button {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .button button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .button button:hover {
+    background-color: #0056b3;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .Address-details {
+      padding-top: 50px;
+    }
+  
+    .left-side {
+      max-width: 100%;
+      margin-right: 0;
+    }
+  
+    .content-wrapper {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .right-side {
+      width: 100%;
+      padding: 20px;
+    }
+  }
+  
