@@ -1,11 +1,13 @@
 import { useState, useCallback } from "react";
 import { FaSearch } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
+import { MdEdit} from "react-icons/md";
 import { Chart, CategoryScale, LinearScale, LineController, BarController, PointElement, LineElement, BarElement, Title, Legend, Tooltip } from 'chart.js';
 import { Line, Bar } from 'react-chartjs-2';
 import UserHeader from './UserHeader';
 import "../CSS/AdminProductPage.css";
 import Footer from "./Footer";
+import { RiDeleteBin6Line } from 'react-icons/ri';
 
 Chart.register(CategoryScale, LinearScale, LineController, BarController, PointElement, LineElement, BarElement, Title, Legend, Tooltip);
 
@@ -155,12 +157,19 @@ const AdminProductPage = () => {
     }
     return pageNumbers;
   };
-
+  const handleEditClick = (productName) => {
+    console.log("Edit clicked for product:", productName);
+    // Add your logic here for handling edit click
+  };
+  
+  const handleDeleteClick = (productName) => {
+    console.log("Delete clicked for product:", productName);
+    // Add your logic here for handling delete click
+  };
+  
   return (
     <div className="Product-container">
       <UserHeader />
-     
-
       <div className="page-content">
         <nav className="sidebar">
         <br/>
@@ -223,7 +232,10 @@ const AdminProductPage = () => {
                 <td>{item.stockStatus}</td>
                 <td>{item.price}</td>
                 <td>{item.date}</td>
-                <td>{item.action}</td>
+                <td>
+                <MdEdit onClick={() => handleEditClick(item.product)} style={{cursor: 'pointer', marginRight: '10px'}} />
+                <RiDeleteBin6Line onClick={() => handleDeleteClick(item.product)} style={{ cursor: 'pointer', color: 'red' }} />
+                </td>
               </tr>
             ))}
           </tbody>

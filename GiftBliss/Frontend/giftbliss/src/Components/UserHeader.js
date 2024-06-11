@@ -22,7 +22,7 @@ const UserHeader = () => {
         
         <div className='mid_header'>
             <div className='logo'>
-                <img alt="Logo" src='images/header_logo.png'></img>
+                <img alt="Logo" src='images/logo.png'></img>
             </div>
             <div className='nav'>
                 <ul>
