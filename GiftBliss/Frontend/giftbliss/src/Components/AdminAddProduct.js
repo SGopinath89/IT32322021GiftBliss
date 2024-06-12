@@ -173,6 +173,7 @@ const AdminAddProduct = () => {
                 <option value="">All Category</option>
                 {/* Add other options here */}
                 <option value="Card">Card</option>
+                <option value="Mug">Mug</option>
               </select>
             </div>
             <div className="form-group">
