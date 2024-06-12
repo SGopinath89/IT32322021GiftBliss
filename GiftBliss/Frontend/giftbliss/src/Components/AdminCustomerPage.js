@@ -161,7 +161,12 @@ const AdminCustomerPage = () => {
                       <td>{customer.status}</td>
                       <td>{customer.lastOrder}</td>
                       <td>{customer.invoice}</td>
-                      <td>{customer.action}</td>
+                      {/* <td>{customer.action}</td> */}
+                      <td>
+                            <MdEdit onClick={()=>handleEditClick(customer.orderId)} style={{cursor: 'pointer', marginRight: '10px'}}/>
+                            <RiDeleteBin6Line onClick={() => handleDeleteClick(customer.orderId)} style={{ cursor: 'pointer', color: 'red' }}/>
+                          </td>
+
                     </tr>
                   ))}
                 </tbody>
