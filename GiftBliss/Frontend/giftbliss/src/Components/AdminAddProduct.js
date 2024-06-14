@@ -172,8 +172,37 @@ const AdminAddProduct = () => {
               >
                 <option value="">All Category</option>
                 {/* Add other options here */}
-                <option value="Card">Card</option>
-                <option value="Mug">Mug</option>
+                <option value="Art">Art Supplies</option>
+                <option value="Children's Book">Children's Book</option>
+                <option value="Fiction">Fiction</option>
+                <option value="Non Fiction">Non Fiction</option>
+                <option value="Journals & Notebooks">Journals & Notebooks</option>
+                <option value="Office Supplies">Office Supplies</option>
+                <option value="Audio Equipment">Audio Equipment</option>
+                <option value="Computer Accessories">Computer Accessories</option>
+                <option value="Gaming">Gaming</option>
+                <option value="Personal Electronics">Personal Electronics</option>
+                <option value="Smart Home Devices">Smart Home Devices</option>
+                <option value="Wearable Tech">Wearable Tech</option>
+                <option value="Apparel">Apparel</option>
+                <option value="Bags & Wallets">Bag & Wallets</option>
+                <option value="Jewelry">Jewelry</option>
+                <option value="Sunglasses">Sunglasses</option>
+                <option value="Footwears">Footwears</option>
+                <option value="Watches">Watches</option>
+                <option value="Fragrance">Fragrance</option>
+                <option value="Art">Art Supplies</option>
+                <option value="Art">Art Supplies</option>
+                <option value="Art">Art Supplies</option>
+                <option value="Art">Art Supplies</option>
+                <option value="Art">Art Supplies</option>
+                <option value="Art">Art Supplies</option>
+                <option value="Art">Art Supplies</option>
+                <option value="Art">Art Supplies</option>
+                <option value="Art">Art Supplies</option>
+                <option value="Art">Art Supplies</option>
+
+                
               </select>
             </div>
             <div className="form-group">
