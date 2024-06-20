@@ -1,11 +1,8 @@
 import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { Chart, CategoryScale, LinearScale, LineController, BarController, PointElement, LineElement, BarElement, Title, Legend, Tooltip } from 'chart.js';
 import UserHeader from './UserHeader';
 import Footer from "./Footer";
 import "../CSS/AdminAddProduct.css";
-
-Chart.register(CategoryScale, LinearScale, LineController, BarController, PointElement, LineElement, BarElement, Title, Legend, Tooltip);
 
 const AdminAddProduct = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -24,13 +21,15 @@ const AdminAddProduct = () => {
 
   const navigate = useNavigate();
 
-  const handleNavigation = useCallback((path) => {
-    navigate(path);
-  }, [navigate]);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setItemDetails({ ...itemDetails, [name]: value });
+  };
 
   const handleImageChange = (e) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const imageUrl = URL.createObjectURL(e.target.files[0]);
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
       setSelectedImage(imageUrl);
       setItemDetails({ ...itemDetails, image: imageUrl });
     }
@@ -46,8 +45,9 @@ const AdminAddProduct = () => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      const imageUrl = URL.createObjectURL(e.dataTransfer.files[0]);
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
       setSelectedImage(imageUrl);
       setItemDetails({ ...itemDetails, image: imageUrl });
       e.dataTransfer.clearData();
@@ -62,6 +62,47 @@ const AdminAddProduct = () => {
     setItemDetails({ ...itemDetails, description: formattedValue });
   };
 
+  const handleNavigation = useCallback((path) => {
+    navigate(path);
+  }, [navigate]);
+
+  const handleAddProduct = async () => {
+    if (!itemDetails.title || !itemDetails.description || !itemDetails.price || !itemDetails.image) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+    try {
+      const response = await fetch('http://localhost:8080/api/add_product', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(itemDetails),
+      });
+      if (response.ok) {
+        alert('Product added successfully!');
+        // Clear form fields after successful addition
+        setItemDetails({
+          title: "",
+          description: "",
+          category: "",
+          date: "",
+          price: "",
+          gender: "",
+          size: "",
+          tag: "",
+          image: ""
+        });
+        setSelectedImage(null);
+      } else {
+        throw new Error('Failed to add product.');
+      }
+    } catch (error) {
+      alert('Failed to add product: ' + error.message);
+    }
+  };
+  
+  
   return (
     <div className="CDetails-container">
       <UserHeader />
@@ -79,7 +120,7 @@ const AdminAddProduct = () => {
         <div className="main-content">
           <div className="right-content">
             <div className="column-container">
-            <p>Upload image</p>
+              <p>Upload image</p>
               <div 
                 className={`image-upload ${dragActive ? "drag-active" : ""}`}
                 onDragEnter={handleDrag}
@@ -109,13 +150,15 @@ const AdminAddProduct = () => {
               <label>Title</label>
               <input 
                 type="text" 
+                name="title"
                 value={itemDetails.title} 
-                onChange={(e) => setItemDetails({ ...itemDetails, title: e.target.value })}
+                onChange={handleInputChange}
               />
             </div>
             <div className="form-group">
               <label>Description</label>
               <textarea 
+                name="description"
                 value={itemDetails.description}
                 onChange={handleDescriptionChange}
               ></textarea>
@@ -123,63 +166,99 @@ const AdminAddProduct = () => {
             <div className="form-group">
               <label>Category</label>
               <select 
+                name="category"
                 value={itemDetails.category}
-                onChange={(e) => setItemDetails({ ...itemDetails, category: e.target.value })}
+                onChange={handleInputChange}
               >
-                <option>All Category</option>
+                <option value="">All Category</option>
                 {/* Add other options here */}
+                <option value="Art">Art Supplies</option>
+                <option value="Children's Book">Children's Book</option>
+                <option value="Fiction">Fiction</option>
+                <option value="Non Fiction">Non Fiction</option>
+                <option value="Journals & Notebooks">Journals & Notebooks</option>
+                <option value="Office Supplies">Office Supplies</option>
+                <option value="Audio Equipment">Audio Equipment</option>
+                <option value="Computer Accessories">Computer Accessories</option>
+                <option value="Gaming">Gaming</option>
+                <option value="Personal Electronics">Personal Electronics</option>
+                <option value="Smart Home Devices">Smart Home Devices</option>
+                <option value="Wearable Tech">Wearable Tech</option>
+                <option value="Apparel">Apparel</option>
+                <option value="Bags & Wallets">Bag & Wallets</option>
+                <option value="Jewelry">Jewelry</option>
+                <option value="Sunglasses">Sunglasses</option>
+                <option value="Footwears">Footwears</option>
+                <option value="Watches">Watches</option>
+                <option value="Fragrance">Fragrance</option>
+                <option value="Art">Art Supplies</option>
+                <option value="Art">Art Supplies</option>
+                <option value="Art">Art Supplies</option>
+                <option value="Art">Art Supplies</option>
+                <option value="Art">Art Supplies</option>
+                <option value="Art">Art Supplies</option>
+                <option value="Art">Art Supplies</option>
+                <option value="Art">Art Supplies</option>
+                <option value="Art">Art Supplies</option>
+                <option value="Art">Art Supplies</option>
+
+                
               </select>
             </div>
             <div className="form-group">
               <label>Product Date</label>
               <input 
                 type="date" 
+                name="date"
                 value={itemDetails.date}
-                onChange={(e) => setItemDetails({ ...itemDetails, date: e.target.value })}
+                onChange={handleInputChange}
               />
             </div>
             <div className="form-group">
               <label>Price ($)</label>
               <div className="dollar-input">
-                
                 <input 
                   type="number" 
+                  name="price"
                   value={itemDetails.price}
-                  onChange={(e) => setItemDetails({ ...itemDetails, price: e.target.value })}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
             <div className="form-group">
               <label>Gender</label>
               <select 
+                name="gender"
                 value={itemDetails.gender}
-                onChange={(e) => setItemDetails({ ...itemDetails, gender: e.target.value })}
+                onChange={handleInputChange}
               >
-                <option>--Gender--</option>
-                <option>books</option>
-                <option>toy</option>
-                <option>Other</option>
+                <option value="">--Gender--</option>
+                <option value="books">Books</option>
+                <option value="toy">Toy</option>
+                <option value="other">Other</option>
               </select>
             </div>
             <div className="form-group">
               <label>Size</label>
               <input 
                 type="text" 
+                name="size"
                 value={itemDetails.size}
-                onChange={(e) => setItemDetails({ ...itemDetails, size: e.target.value })}
+                onChange={handleInputChange}
               />
             </div>
             <div className="form-group">
               <label>Tag</label>
               <input 
                 type="text" 
+                name="tag"
                 placeholder="Enter a Tag..."
                 value={itemDetails.tag}
-                onChange={(e) => setItemDetails({ ...itemDetails, tag: e.target.value })}
+                onChange={handleInputChange}
               />
             </div>
             <div className="form-actions">
-              <button>Add Product</button>
+              <button onClick={handleAddProduct}>Add Product</button>
               <button>Save Product</button>
             </div>
           </div>
@@ -190,7 +269,6 @@ const AdminAddProduct = () => {
             <p>Description:<br/>
               {itemDetails.description}
             </p>
-           
             <p>Product Date: {itemDetails.date}</p>
             <p>For this product: {itemDetails.gender}</p>
             <p>Size: {itemDetails.size}</p>
