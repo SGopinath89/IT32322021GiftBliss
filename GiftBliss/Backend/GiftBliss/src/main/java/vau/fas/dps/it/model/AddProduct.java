@@ -36,7 +36,7 @@ public class AddProduct {
 
     private String size;
 
-    private String tag;
+    private Double count;
 
     private String image;
 
@@ -106,12 +106,12 @@ public class AddProduct {
         this.size = size;
     }
 
-    public String getTag() {
-        return tag;
+    public Double getCount() {
+        return count;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setCount(Double count) {
+        this.count = count;
     }
 
     public String getImage() {

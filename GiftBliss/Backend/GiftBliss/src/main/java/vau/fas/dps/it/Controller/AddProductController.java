@@ -38,7 +38,7 @@ public class AddProductController {
         }
     }
 
-    @GetMapping("/products")
+    @GetMapping("/add_product")
     public ResponseEntity<List<AddProduct>> getAllProducts() {
         try {
             List<AddProduct> products = productService.getAllProducts();

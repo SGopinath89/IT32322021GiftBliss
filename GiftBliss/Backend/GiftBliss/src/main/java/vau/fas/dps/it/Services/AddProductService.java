@@ -14,8 +14,6 @@ public class AddProductService {
     private AddProductRepo productRepo;
 
     public AddProduct addProduct(AddProduct product) {
-        // Optional: add more logging to debug
-        System.out.println("Adding product: " + product);
         return productRepo.save(product);
     }
 

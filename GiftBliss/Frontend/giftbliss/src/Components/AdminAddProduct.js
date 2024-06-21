@@ -15,7 +15,7 @@ const AdminAddProduct = () => {
     price: "",
     gender: "",
     size: "",
-    tag: "",
+    count: "",
     image: ""
   });
 
@@ -23,7 +23,7 @@ const AdminAddProduct = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setItemDetails({ ...itemDetails, [name]: value });
+    setItemDetails(prevState => ({ ...prevState, [name]: value }));
   };
 
   const handleImageChange = (e) => {
@@ -31,7 +31,7 @@ const AdminAddProduct = () => {
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setSelectedImage(imageUrl);
-      setItemDetails({ ...itemDetails, image: imageUrl });
+      setItemDetails(prevState => ({ ...prevState, image: imageUrl }));
     }
   };
 
@@ -49,17 +49,17 @@ const AdminAddProduct = () => {
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setSelectedImage(imageUrl);
-      setItemDetails({ ...itemDetails, image: imageUrl });
+      setItemDetails(prevState => ({ ...prevState, image: imageUrl }));
       e.dataTransfer.clearData();
     }
   };
 
   const handleDescriptionChange = (e) => {
     const value = e.target.value;
-    const formattedValue = value.split('\n').map(line => 
+    const formattedValue = value.split('\n').map(line =>
       line.length > 40 ? line.match(/.{1,40}/g).join('\n') : line
     ).join('\n');
-    setItemDetails({ ...itemDetails, description: formattedValue });
+    setItemDetails(prevState => ({ ...prevState, description: formattedValue }));
   };
 
   const handleNavigation = useCallback((path) => {
@@ -90,7 +90,7 @@ const AdminAddProduct = () => {
           price: "",
           gender: "",
           size: "",
-          tag: "",
+          count: "",
           image: ""
         });
         setSelectedImage(null);
@@ -101,8 +101,7 @@ const AdminAddProduct = () => {
       alert('Failed to add product: ' + error.message);
     }
   };
-  
-  
+
   return (
     <div className="CDetails-container">
       <UserHeader />
@@ -121,7 +120,7 @@ const AdminAddProduct = () => {
           <div className="right-content">
             <div className="column-container">
               <p>Upload image</p>
-              <div 
+              <div
                 className={`image-upload ${dragActive ? "drag-active" : ""}`}
                 onDragEnter={handleDrag}
                 onDragLeave={handleDrag}
@@ -135,11 +134,11 @@ const AdminAddProduct = () => {
                 )}
                 {selectedImage && <img src={selectedImage} alt="Selected" className="uploaded-image" />}
                 <label htmlFor="fileInput" className="file-label">Choose File</label>
-                <input 
-                  type="file" 
-                  accept="image/*" 
-                  onChange={handleImageChange} 
-                  style={{ display: "none" }} 
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  style={{ display: "none" }}
                   id="fileInput"
                 />
               </div>
@@ -148,16 +147,16 @@ const AdminAddProduct = () => {
           <div className="item-details">
             <div className="form-group">
               <label>Title</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 name="title"
-                value={itemDetails.title} 
+                value={itemDetails.title}
                 onChange={handleInputChange}
               />
             </div>
             <div className="form-group">
               <label>Description</label>
-              <textarea 
+              <textarea
                 name="description"
                 value={itemDetails.description}
                 onChange={handleDescriptionChange}
@@ -165,13 +164,12 @@ const AdminAddProduct = () => {
             </div>
             <div className="form-group">
               <label>Category</label>
-              <select 
+              <select
                 name="category"
                 value={itemDetails.category}
                 onChange={handleInputChange}
               >
                 <option value="">All Category</option>
-                {/* Add other options here */}
                 <option value="Art">Art Supplies</option>
                 <option value="Children's Book">Children's Book</option>
                 <option value="Fiction">Fiction</option>
@@ -185,30 +183,18 @@ const AdminAddProduct = () => {
                 <option value="Smart Home Devices">Smart Home Devices</option>
                 <option value="Wearable Tech">Wearable Tech</option>
                 <option value="Apparel">Apparel</option>
-                <option value="Bags & Wallets">Bag & Wallets</option>
+                <option value="Bags & Wallets">Bags & Wallets</option>
                 <option value="Jewelry">Jewelry</option>
                 <option value="Sunglasses">Sunglasses</option>
                 <option value="Footwears">Footwears</option>
                 <option value="Watches">Watches</option>
                 <option value="Fragrance">Fragrance</option>
-                <option value="Art">Art Supplies</option>
-                <option value="Art">Art Supplies</option>
-                <option value="Art">Art Supplies</option>
-                <option value="Art">Art Supplies</option>
-                <option value="Art">Art Supplies</option>
-                <option value="Art">Art Supplies</option>
-                <option value="Art">Art Supplies</option>
-                <option value="Art">Art Supplies</option>
-                <option value="Art">Art Supplies</option>
-                <option value="Art">Art Supplies</option>
-
-                
               </select>
             </div>
             <div className="form-group">
               <label>Product Date</label>
-              <input 
-                type="date" 
+              <input
+                type="date"
                 name="date"
                 value={itemDetails.date}
                 onChange={handleInputChange}
@@ -217,8 +203,8 @@ const AdminAddProduct = () => {
             <div className="form-group">
               <label>Price ($)</label>
               <div className="dollar-input">
-                <input 
-                  type="number" 
+                <input
+                  type="number"
                   name="price"
                   value={itemDetails.price}
                   onChange={handleInputChange}
@@ -227,7 +213,7 @@ const AdminAddProduct = () => {
             </div>
             <div className="form-group">
               <label>Gender</label>
-              <select 
+              <select
                 name="gender"
                 value={itemDetails.gender}
                 onChange={handleInputChange}
@@ -240,33 +226,34 @@ const AdminAddProduct = () => {
             </div>
             <div className="form-group">
               <label>Size</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 name="size"
                 value={itemDetails.size}
                 onChange={handleInputChange}
               />
             </div>
             <div className="form-group">
-              <label>Tag</label>
-              <input 
-                type="text" 
-                name="tag"
-                placeholder="Enter a Tag..."
-                value={itemDetails.tag}
+              <label>Count</label>
+              <input
+                type="number"
+                name="count"
+                placeholder="Enter a count..."
+                value={itemDetails.count}
                 onChange={handleInputChange}
               />
             </div>
             <div className="form-actions">
               <button onClick={handleAddProduct}>Add Product</button>
-              <button>Save Product</button>
+             
+              <button>Save Product</button> 
             </div>
           </div>
           <div className="details">
             {selectedImage && <img className="image" alt="Product" src={itemDetails.image} />}
             <h4>Title</h4>
             <h5>{itemDetails.title}</h5>
-            <p>Description:<br/>
+            <p>Description:<br />
               {itemDetails.description}
             </p>
             <p>Product Date: {itemDetails.date}</p>
