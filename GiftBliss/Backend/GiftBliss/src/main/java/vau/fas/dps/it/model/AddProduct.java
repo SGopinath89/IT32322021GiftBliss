@@ -30,11 +30,14 @@ public class AddProduct {
     @NotNull(message = "Price is mandatory")
     @Min(value = 0, message = "Price must be greater than or equal to 0")
     private Double price;
-
+    @Min(value = 0, message = "Price must be greater than or equal to 0")
+    private Double discound;
     @NotBlank(message = "Gender is mandatory")
     private String gender;
 
-    private String size;
+  
+
+	private String size;
 
     private Double count;
 
@@ -89,7 +92,13 @@ public class AddProduct {
     public void setPrice(Double price) {
         this.price = price;
     }
+    public Double getDiscound() {
+  		return discound;
+  	}
 
+  	public void setDiscound(Double discound) {
+  		this.discound = discound;
+  	}
     public String getGender() {
         return gender;
     }
