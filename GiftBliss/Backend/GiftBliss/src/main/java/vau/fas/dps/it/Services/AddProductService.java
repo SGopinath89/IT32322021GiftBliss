@@ -20,4 +20,14 @@ public class AddProductService {
     public List<AddProduct> getAllProducts() {
         return productRepo.findAll();
     }
+
+	public List<AddProduct> getProductsOnDiscount1() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<AddProduct> getProductsOnDiscount() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

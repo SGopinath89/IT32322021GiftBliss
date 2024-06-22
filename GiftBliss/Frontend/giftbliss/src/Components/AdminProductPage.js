@@ -10,29 +10,35 @@ import "../CSS/AdminProductPage.css";
 
 const AdminProductPage = () => {
   const [products, setProducts] = useState([]);
+  const [selectedTable, setSelectedTable] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
+  const [editProductId, setEditProductId] = useState(null); // State to track the product being edited
   const itemsPerPage = 10;
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/add_product'); // Adjust endpoint if needed
-        console.log(response.data); // Check if this logs the expected product data
+        const response = await axios.get('http://localhost:8080/api/add_product');
         setProducts(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
-        // Handle error (e.g., show error message to user)
       }
     };
-  
+
     fetchProducts();
   }, []);
 
   const getCurrentTableData = () => {
+    let filteredProducts = products;
+
+    if (selectedTable === 'discount') {
+      filteredProducts = products.filter(product => product.discound !== null && product.discound > 0);
+    }
+
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    return products.slice(indexOfFirstItem, indexOfLastItem);
+    return filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
   };
 
   const handleNextPage = () => {
@@ -47,14 +53,46 @@ const AdminProductPage = () => {
     return products.length;
   };
 
-  const handleEditClick = (productName) => {
-    console.log("Edit clicked for product:", productName);
-    // Implement edit functionality
+  const handleEditClick = (productId) => {
+    setEditProductId(productId); // Set the product id being edited
   };
 
-  const handleDeleteClick = (productName) => {
-    console.log("Delete clicked for product:", productName);
-    // Implement delete functionality
+  const handleSaveEdit = async (editedProduct) => {
+    try {
+      const response = await axios.put(`http://localhost:8080/api/add_product/${editedProduct.id}`, editedProduct);
+      console.log('Product updated successfully:', response.data);
+      setEditProductId(null); // Clear edit mode
+      // Optionally update the local products state or refetch data
+      refreshProducts(); // Refresh products after edit
+    } catch (error) {
+      console.error('Error updating product:', error);
+      // Handle error (e.g., show error message to user)
+    }
+  };
+
+  const handleDeleteClick = async (productId) => {
+    try {
+      const response = await axios.delete(`http://localhost:8080/api/add_product/${productId}`);
+      console.log('Product deleted successfully:', response.data);
+      // Remove the deleted product from local state or refetch data
+      refreshProducts(); // Refresh products after delete
+    } catch (error) {
+      console.error('Error deleting product:', error);
+      // Handle error (e.g., show error message to user)
+    }
+  };
+
+  const refreshProducts = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/api/add_product');
+      setProducts(response.data);
+    } catch (error) {
+      console.error('Error refreshing products:', error);
+    }
+  };
+
+  const cancelEdit = () => {
+    setEditProductId(null); // Cancel editing
   };
 
   const navigateTo = (path) => {
@@ -72,6 +110,11 @@ const AdminProductPage = () => {
         {i + 1}
       </button>
     ));
+  };
+
+  const handleTableSelection = (table) => {
+    setSelectedTable(table);
+    setCurrentPage(1); // Reset to first page when table selection changes
   };
 
   return (
@@ -95,6 +138,10 @@ const AdminProductPage = () => {
             <p className="page-title">GiftBliss / <span className="select">Products</span></p>
           </div>
           <div className="table-controls">
+            <div className="table-selection">
+              <button onClick={() => handleTableSelection('all')} className={selectedTable === 'all' ? 'active' : ''}>All Data</button>
+              <button onClick={() => handleTableSelection('discount')} className={selectedTable === 'discount' ? 'active' : ''}>On Discount</button>
+            </div>
             
             <div className="table-filters">
               <select>
@@ -107,6 +154,7 @@ const AdminProductPage = () => {
                 <input type="text" placeholder="Search..." />
                 <button className='search_button'><FaSearch /></button>
               </div>
+              {/* Add Product button */}
               <button>Add Product</button>
             </div>
           </div>
@@ -116,26 +164,75 @@ const AdminProductPage = () => {
               <thead>
                 <tr>
                   <th>Title</th>
+                  <th>Description</th>
                   <th>Category</th>
-                  <th>Size</th>
                   <th>Price</th>
                   <th>Date</th>
                   <th>Count</th>
+                  {selectedTable === 'discount' && <th>Discount</th>}
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 {getCurrentTableData().map(product => (
-                  <tr key={product.title}>
-                    <td>{product.title}</td>
-                    <td>{product.category}</td>
-                    <td>{product.size}</td>
-                    <td>{product.price}</td>
+                  <tr key={product.id}>
+                    <td>{editProductId === product.id ? (
+                      <input
+                        type="text"
+                        value={product.title}
+                        onChange={(e) => {
+                          const newTitle = e.target.value;
+                          setProducts(prevProducts => prevProducts.map(p => p.id === product.id ? { ...p, title: newTitle } : p));
+                        }}
+                      />
+                    ) : product.title}</td>
+                    <td>{editProductId === product.id ? (
+                      <input
+                        type="text"
+                        value={product.description}
+                        onChange={(e) => {
+                          const newDesc = e.target.value;
+                          setProducts(prevProducts => prevProducts.map(p => p.id === product.id ? { ...p, description: newDesc } : p));
+                        }}
+                      />
+                    ) : product.description}</td>
+                    <td>{editProductId === product.id ? (
+                      <input
+                        type="text"
+                        value={product.category}
+                        onChange={(e) => {
+                          const newCategory = e.target.value;
+                          setProducts(prevProducts => prevProducts.map(p => p.id === product.id ? { ...p, category: newCategory } : p));
+                        }}
+                      />
+                    ) : product.category}</td>
+                    <td>{editProductId === product.id ? (
+                      <input
+                        type="text"
+                        value={product.price}
+                        onChange={(e) => {
+                          const newPrice = e.target.value;
+                          setProducts(prevProducts => prevProducts.map(p => p.id === product.id ? { ...p, price: newPrice } : p));
+                        }}
+                      />
+                    ) : product.price}</td>
                     <td>{product.date}</td>
                     <td>{product.count}</td>
+                    {selectedTable === 'discount'                      ? <td>{product.discound}</td>
+                      : null
+                    }
                     <td>
-                      <MdEdit onClick={() => handleEditClick(product.title)} style={{ cursor: 'pointer', marginRight: '10px' }} />
-                      <RiDeleteBin6Line onClick={() => handleDeleteClick(product.title)} style={{ cursor: 'pointer', color: 'red' }} />
+                      {editProductId === product.id ? (
+                        <>
+                          <button onClick={() => handleSaveEdit(product)}>Save</button>
+                          <button onClick={() => cancelEdit()}>Cancel</button>
+                        </>
+                      ) : (
+                        <>
+                          <MdEdit onClick={() => handleEditClick(product.id)} style={{ cursor: 'pointer', marginRight: '10px' }} />
+                          <RiDeleteBin6Line onClick={() => handleDeleteClick(product.id)} style={{ cursor: 'pointer', color: 'red' }} />
+                        </>
+                      )}
                     </td>
                   </tr>
                 ))}
@@ -155,3 +252,4 @@ const AdminProductPage = () => {
 };
 
 export default AdminProductPage;
+

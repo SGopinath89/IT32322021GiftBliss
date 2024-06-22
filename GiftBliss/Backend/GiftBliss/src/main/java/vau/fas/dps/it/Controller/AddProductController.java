@@ -9,8 +9,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import vau.fas.dps.it.Services.AddProductService;
+import vau.fas.dps.it.Services.CategoryService;
+import vau.fas.dps.it.Services.SubCategoryService;
 import vau.fas.dps.it.model.AddProduct;
+import vau.fas.dps.it.model.Category;
+import vau.fas.dps.it.model.SubCategory;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,6 +32,8 @@ public class AddProductController {
     @Autowired
     private AddProductService productService;
 
+ 
+
     @PostMapping("/add_product")
     public ResponseEntity<AddProduct> addProduct(@RequestBody AddProduct product) {
         try {
@@ -34,7 +42,7 @@ public class AddProductController {
             return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
         } catch (Exception e) {
             logger.error("Error saving product", e);
-            throw e;
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -45,7 +53,22 @@ public class AddProductController {
             return new ResponseEntity<>(products, HttpStatus.OK);
         } catch (Exception e) {
             logger.error("Error retrieving products", e);
-            throw e;
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/add_product/discount")
+    public ResponseEntity<List<AddProduct>> getProductsOnDiscount() {
+        try {
+            List<AddProduct> products = productService.getProductsOnDiscount();
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("Error retrieving discounted products", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    
+
+    
 }
