@@ -1,25 +1,35 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './Components/HomePage';
-import CategoryPage from './Components/CategoryPage';
-import AdminAddProduct from './Components/AdminAddProduct';
-import AdminProductPage from './Components/AdminProductPage'; // Import AdminProductPage
+
+import CategoryPage from './components/CategoryPage';
 import './CSS/HomePage.css';
 import './CSS/UserHeader.css';
 import './CSS/Footer.css';
+import AdminRefundPage from './components/AdminRefundPage';
+import UserOrderPage from './components/UserOrderPage';
+import Login from './components/Login';
+import Signup from './Components/Signup';
+import HomePage from './Components/HomePage';
+import AdminAddProduct from './Components/AdminAddProduct';
+import AdminProductPage from './Components/AdminProductPage';
+
 
 const App = () => {
   return (
-    <Router>
+    <div className="App">
       <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/" element={<HomePage />} />
-        <Route path="/admin/add_product" element={<AdminAddProduct />} />
-        <Route path="/admin/product_page" element={<AdminProductPage />} /> {/* Add route for AdminProductPage */}
         <Route path="/:category" element={<CategoryPage />} />
         <Route path="/:category/:subcategory" element={<CategoryPage />} />
+        <Route path="/admin/add_product" element={<AdminAddProduct />} />
+        <Route path="/admin/product_page" element={<AdminProductPage />} /> {/* Add route for AdminProductPage */}
+
       </Routes>
-    </Router>
+    </div>
   );
-};
+}
 
 export default App;
