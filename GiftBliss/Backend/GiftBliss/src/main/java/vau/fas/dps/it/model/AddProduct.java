@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -30,19 +33,32 @@ public class AddProduct {
     @NotNull(message = "Price is mandatory")
     @Min(value = 0, message = "Price must be greater than or equal to 0")
     private Double price;
-
+    @Min(value = 0, message = "Price must be greater than or equal to 0")
+    private Double discound;
     @NotBlank(message = "Gender is mandatory")
     private String gender;
 
-    private String size;
+  
 
-    private String tag;
+	private String size;
+
+    private Double count;
 
     private String image;
-
+    @ManyToOne
+    @JoinColumn(name = "sub_category_id")
+    private SubCategory subCategory;
     // Getters and Setters
 
-    public Long getId() {
+    public SubCategory getSubCategory() {
+		return subCategory;
+	}
+
+	public void setSubCategory(SubCategory subCategory) {
+		this.subCategory = subCategory;
+	}
+
+	public Long getId() {
         return id;
     }
 
@@ -89,7 +105,13 @@ public class AddProduct {
     public void setPrice(Double price) {
         this.price = price;
     }
+    public Double getDiscound() {
+  		return discound;
+  	}
 
+  	public void setDiscound(Double discound) {
+  		this.discound = discound;
+  	}
     public String getGender() {
         return gender;
     }
@@ -106,12 +128,12 @@ public class AddProduct {
         this.size = size;
     }
 
-    public String getTag() {
-        return tag;
+    public Double getCount() {
+        return count;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setCount(Double count) {
+        this.count = count;
     }
 
     public String getImage() {

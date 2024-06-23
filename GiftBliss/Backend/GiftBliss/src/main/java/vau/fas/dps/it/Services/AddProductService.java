@@ -14,12 +14,20 @@ public class AddProductService {
     private AddProductRepo productRepo;
 
     public AddProduct addProduct(AddProduct product) {
-        // Optional: add more logging to debug
-        System.out.println("Adding product: " + product);
         return productRepo.save(product);
     }
 
     public List<AddProduct> getAllProducts() {
         return productRepo.findAll();
     }
+
+	public List<AddProduct> getProductsOnDiscount1() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<AddProduct> getProductsOnDiscount() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
