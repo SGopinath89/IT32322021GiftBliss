@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import CategoryPage from './components/CategoryPage';
+import ProductPage from './Components/ProductPage'
 import './CSS/HomePage.css';
 import './CSS/UserHeader.css';
 import './CSS/Footer.css';
@@ -26,7 +27,7 @@ const App = () => {
         <Route path="/:category/:subcategory" element={<CategoryPage />} />
         <Route path="/admin/add_product" element={<AdminAddProduct />} />
         <Route path="/admin/product_page" element={<AdminProductPage />} /> {/* Add route for AdminProductPage */}
-
+        <Route path="/product/:category/:productName" element={<ProductPage />} />
       </Routes>
     </div>
   );
