@@ -11,6 +11,7 @@ import "../CSS/AdminProductPage.css";
 
 const AdminProductPage = () => {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [selectedTable, setSelectedTable] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const [editProductId, setEditProductId] = useState(null);
@@ -24,6 +25,7 @@ const AdminProductPage = () => {
     discount: ''
   });
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   const itemsPerPage = 10;
   const navigate = useNavigate();
@@ -33,6 +35,9 @@ const AdminProductPage = () => {
       try {
         const response = await axios.get('http://localhost:8080/api/add_product');
         setProducts(response.data);
+
+        const uniqueCategories = [...new Set(response.data.map(product => product.category))];
+        setCategories(uniqueCategories);
       } catch (error) {
         console.error('Error fetching products:', error);
       }
@@ -46,6 +51,10 @@ const AdminProductPage = () => {
 
     if (selectedTable === 'discount') {
       filteredProducts = products.filter(product => product.discount !== null && product.discount > 0);
+    }
+
+    if (selectedCategory) {
+      filteredProducts = filteredProducts.filter(product => product.category === selectedCategory);
     }
 
     if (searchTerm) {
@@ -69,9 +78,13 @@ const AdminProductPage = () => {
 
   const getTotalItems = () => {
     let filteredProducts = products;
-    
+
     if (selectedTable === 'discount') {
       filteredProducts = products.filter(product => product.discount !== null && product.discount > 0);
+    }
+
+    if (selectedCategory) {
+      filteredProducts = filteredProducts.filter(product => product.category === selectedCategory);
     }
 
     if (searchTerm) {
@@ -145,6 +158,9 @@ const AdminProductPage = () => {
     try {
       const response = await axios.get('http://localhost:8080/api/add_product');
       setProducts(response.data);
+
+      const uniqueCategories = [...new Set(response.data.map(product => product.category))];
+      setCategories(uniqueCategories);
     } catch (error) {
       console.error('Error refreshing products:', error);
     }
@@ -169,6 +185,11 @@ const AdminProductPage = () => {
 
   const handleTableSelection = (table) => {
     setSelectedTable(table);
+    setCurrentPage(1);
+  };
+
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
     setCurrentPage(1);
   };
 
@@ -199,27 +220,11 @@ const AdminProductPage = () => {
             </div>
 
             <div className="table-filters">
-              <select>
-              <option value="">All Category</option>
-                <option value="Art">Art Supplies</option>
-                <option value="Children's Book">Children's Book</option>
-                <option value="Fiction">Fiction</option>
-                <option value="Non Fiction">Non Fiction</option>
-                <option value="Journals & Notebooks">Journals & Notebooks</option>
-                <option value="Office Supplies">Office Supplies</option>
-                <option value="Audio Equipment">Audio Equipment</option>
-                <option value="Computer Accessories">Computer Accessories</option>
-                <option value="Gaming">Gaming</option>
-                <option value="Personal Electronics">Personal Electronics</option>
-                <option value="Smart Home Devices">Smart Home Devices</option>
-                <option value="Wearable Tech">Wearable Tech</option>
-                <option value="Apparel">Apparel</option>
-                <option value="Bags & Wallets">Bags & Wallets</option>
-                <option value="Jewelry">Jewelry</option>
-                <option value="Sunglasses">Sunglasses</option>
-                <option value="Footwears">Footwears</option>
-                <option value="Watches">Watches</option>
-                <option value="Fragrance">Fragrance</option>
+              <select value={selectedCategory} onChange={handleCategoryChange}>
+                <option value="">All Category</option>
+                {categories.map((category, index) => (
+                  <option key={index} value={category}>{category}</option>
+                ))}
               </select>
               <div className="search">
                 <input
@@ -230,7 +235,10 @@ const AdminProductPage = () => {
                 />
                 <button className='search_button'><FaSearch /></button>
               </div>
-              <button><Link to='/admin/add_product' >Add Product</Link></button>
+              <button >
+                <Link style={{ color: 'white', textDecoration: 'none' }} to='/admin/add_product'>Add Product</Link>
+              </button>
+
             </div>
           </div>
 
