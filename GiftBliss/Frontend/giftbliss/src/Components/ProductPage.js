@@ -1,9 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import '../CSS/ProductPage.css';
-import Footer from './Components/Footer';
-import UserHeader from './Components/UserHeader';
+
 import { IoIosArrowRoundBack } from 'react-icons/io';
+import Footer from './Footer';
+import UserHeader from './UserHeader';
+
 
 const productDetails = {
   art: [
