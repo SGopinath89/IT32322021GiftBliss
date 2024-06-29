@@ -1,14 +1,14 @@
 package vau.fas.dps.it.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class AddProduct {
@@ -32,22 +32,21 @@ public class AddProduct {
     @NotNull(message = "Price is mandatory")
     @Min(value = 0, message = "Price must be greater than or equal to 0")
     private Double price;
-    @Min(value = 0, message = "Price must be greater than or equal to 0")
-    private Double discound;
+
+    @Min(value = 0, message = "Discount must be greater than or equal to 0")
+    private Double discount;
+
     @NotBlank(message = "Gender is mandatory")
     private String gender;
 
-  
-
-	private String size;
+    private String size;
 
     private Double count;
 
     private String image;
-    
-   
 
-	public Long getId() {
+    // Getters and Setters
+    public Long getId() {
         return id;
     }
 
@@ -94,13 +93,15 @@ public class AddProduct {
     public void setPrice(Double price) {
         this.price = price;
     }
-    public Double getDiscound() {
-  		return discound;
-  	}
 
-  	public void setDiscound(Double discound) {
-  		this.discound = discound;
-  	}
+    public Double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Double discount) {
+        this.discount = discount;
+    }
+
     public String getGender() {
         return gender;
     }

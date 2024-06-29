@@ -1,24 +1,14 @@
 package vau.fas.dps.it.Controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import vau.fas.dps.it.Services.AddProductService;
-import vau.fas.dps.it.Services.CategoryService;
-import vau.fas.dps.it.Services.SubCategoryService;
 import vau.fas.dps.it.model.AddProduct;
-import vau.fas.dps.it.model.Category;
-import vau.fas.dps.it.model.SubCategory;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -32,8 +22,6 @@ public class AddProductController {
     @Autowired
     private AddProductService productService;
 
- 
-
     @PostMapping("/add_product")
     public ResponseEntity<AddProduct> addProduct(@RequestBody AddProduct product) {
         try {
@@ -42,6 +30,18 @@ public class AddProductController {
             return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
         } catch (Exception e) {
             logger.error("Error saving product", e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/add_product/{id}")
+    public ResponseEntity<AddProduct> updateProduct(@PathVariable Long id, @RequestBody AddProduct product) {
+        try {
+            logger.debug("Updating product with ID: {}", id);
+            AddProduct updatedProduct = productService.updateProduct(id, product);
+            return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("Error updating product", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -67,8 +67,4 @@ public class AddProductController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    
-
-    
 }
