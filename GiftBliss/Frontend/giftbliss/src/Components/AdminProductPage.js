@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
 import { MdEdit } from "react-icons/md";
 import { RiDeleteBin6Line } from 'react-icons/ri';
@@ -22,6 +23,7 @@ const AdminProductPage = () => {
     count: '',
     discount: ''
   });
+  const [searchTerm, setSearchTerm] = useState('');
 
   const itemsPerPage = 10;
   const navigate = useNavigate();
@@ -46,6 +48,12 @@ const AdminProductPage = () => {
       filteredProducts = products.filter(product => product.discount !== null && product.discount > 0);
     }
 
+    if (searchTerm) {
+      filteredProducts = filteredProducts.filter(product =>
+        product.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     return filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
@@ -60,10 +68,19 @@ const AdminProductPage = () => {
   };
 
   const getTotalItems = () => {
+    let filteredProducts = products;
+    
     if (selectedTable === 'discount') {
-      return products.filter(product => product.discount !== null && product.discount > 0).length;
+      filteredProducts = products.filter(product => product.discount !== null && product.discount > 0);
     }
-    return products.length;
+
+    if (searchTerm) {
+      filteredProducts = filteredProducts.filter(product =>
+        product.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    return filteredProducts.length;
   };
 
   const handleEditClick = (product) => {
@@ -108,7 +125,7 @@ const AdminProductPage = () => {
     } catch (error) {
       alert('Failed to update product: ' + error.message);
     }
-};
+  };
 
   const cancelEdit = () => {
     setEditProductId(null);
@@ -189,10 +206,15 @@ const AdminProductPage = () => {
                 <option value="Category 3">Category 3</option>
               </select>
               <div className="search">
-                <input type="text" placeholder="Search..." />
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
                 <button className='search_button'><FaSearch /></button>
               </div>
-              <button>Add Product</button>
+              <button><Link to='/admin/add_product' >Add Product</Link></button>
             </div>
           </div>
 
@@ -261,14 +283,21 @@ const AdminProductPage = () => {
                         onChange={handleInputChange}
                       />
                     ) : product.count}</td>
-                    <td>{editProductId === product.id ? (
-                      <input
-                        type="text"
-                        value={editProductDetails.discount}
-                        name="discount"
-                        onChange={handleInputChange}
-                      />
-                    ) : product.discount}</td>
+                    <td>
+                      {editProductId === product.id ? (
+                        <input
+                          type="text"
+                          value={editProductDetails.discount}
+                          name="discount"
+                          onChange={handleInputChange}
+                        />
+                      ) : (
+                        <>
+                          {product.discount}%
+                        </>
+                      )}
+                    </td>
+
                     <td>
                       {editProductId === product.id ? (
                         <>

@@ -22,19 +22,6 @@ public class AddProductController {
     @Autowired
     private AddProductService productService;
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-    @Autowired
-    private CategoryService categoryService;
-
-    @Autowired
-    private SubCategoryService subCategoryService;
-=======
- 
->>>>>>> 74d747d1a6b5499c75bc2e51a0a4bd309c6b6fc1
-
->>>>>>> 87a2b3b7f85d947f6201cde5780bc37e903277ce
     @PostMapping("/add_product")
     public ResponseEntity<AddProduct> addProduct(@RequestBody AddProduct product) {
         try {
@@ -67,42 +54,6 @@ public class AddProductController {
         } catch (Exception e) {
             logger.error("Error retrieving products", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-<<<<<<< HEAD
-        }
-    }
-
-    @GetMapping("/add_product/discount")
-    public ResponseEntity<List<AddProduct>> getProductsOnDiscount() {
-        try {
-            List<AddProduct> products = productService.getProductsOnDiscount();
-            return new ResponseEntity<>(products, HttpStatus.OK);
-        } catch (Exception e) {
-            logger.error("Error retrieving discounted products", e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @GetMapping("/categories")
-    public ResponseEntity<List<Category>> getCategories() {
-        try {
-            List<Category> categories = categoryService.getAllCategories();
-            return new ResponseEntity<>(categories, HttpStatus.OK);
-        } catch (Exception e) {
-            logger.error("Error retrieving categories", e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @GetMapping("/subcategories")
-    public ResponseEntity<List<SubCategory>> getSubCategories() {
-        try {
-            List<SubCategory> subCategories = subCategoryService.getAllSubCategories();
-            return new ResponseEntity<>(subCategories, HttpStatus.OK);
-        } catch (Exception e) {
-            logger.error("Error retrieving subcategories", e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-=======
->>>>>>> 74d747d1a6b5499c75bc2e51a0a4bd309c6b6fc1
         }
     }
 
