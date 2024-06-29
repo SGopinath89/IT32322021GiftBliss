@@ -1,5 +1,18 @@
 package vau.fas.dps.it.model;
 
+<<<<<<< HEAD
+=======
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+<<<<<<< HEAD
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+=======
+
+>>>>>>> 74d747d1a6b5499c75bc2e51a0a4bd309c6b6fc1
+>>>>>>> 87a2b3b7f85d947f6201cde5780bc37e903277ce
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -44,6 +57,26 @@ public class AddProduct {
     private Double count;
 
     private String image;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    @ManyToOne
+    @JoinColumn(name = "sub_category_id")
+    private SubCategory subCategory;
+    // Getters and Setters
+
+    public SubCategory getSubCategory() {
+		return subCategory;
+	}
+
+	public void setSubCategory(SubCategory subCategory) {
+		this.subCategory = subCategory;
+	}
+=======
+    
+   
+>>>>>>> 74d747d1a6b5499c75bc2e51a0a4bd309c6b6fc1
+>>>>>>> 87a2b3b7f85d947f6201cde5780bc37e903277ce
 
     // Getters and Setters
     public Long getId() {
