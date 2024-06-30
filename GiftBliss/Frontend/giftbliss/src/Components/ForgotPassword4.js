@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/ForgotPassword4.css'; // Import the CSS file
+import '../CSS/ForgotPassword4.css'; // Import the CSS file
 
 const ForgotPassword4 = () => {
   const navigate = useNavigate();
