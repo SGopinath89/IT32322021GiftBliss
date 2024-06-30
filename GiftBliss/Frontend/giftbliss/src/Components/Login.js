@@ -40,8 +40,13 @@ const Login = () => {
         navigate('/signup');
     };
 
+    const handleForgotPassword = (e) => {
+        e.preventDefault();
+        navigate('/forgot-password');
+    };
+
     return (
-        <div className="container">
+        <div className="login-container">
             <div className="welcome-section">
                 <h3>Gift Bliss</h3>
                 <h3>Shop Anytime</h3>
@@ -61,7 +66,7 @@ const Login = () => {
                     {error && <p className="error">{error}</p>}
                     <button type="submit">Sign In</button>
                     <div className="links">
-                        <a href="#" className="forget-password">Forgot password?</a>
+                        <a href="#" className="forget-password" onClick={handleForgotPassword}>Forgot password?</a>
                         <a href="#" className="sign-up" onClick={handleSignUp}>Don't you have an account? <span>Sign Up</span></a>
                     </div>
                 </form>

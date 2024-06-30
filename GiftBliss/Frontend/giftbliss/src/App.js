@@ -12,11 +12,12 @@ import ForgotPassword4 from './Components/ForgotPassword4';
 import Signup from './Components/Signup';
 import AdminAddProduct from './Components/AdminAddProduct';
 import AdminProductPage from './Components/AdminProductPage';
-import HomePage from './Components/HomePage';
+
 
 import './CSS/HomePage.css';
 import './CSS/UserHeader.css';
 import './CSS/Footer.css';
+import HomePage from './components/HomePage';
 
 const App = () => {
   return (
@@ -31,7 +32,7 @@ const App = () => {
           <Route path="/forgotpassword4" element={<ForgotPassword4 />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/home" element={<HomePage />} />
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage/>} />
           <Route path="/:category" element={<CategoryPage />} />
           <Route path="/:category/:subcategory" element={<CategoryPage />} />
           <Route path="/admin/add_product" element={<AdminAddProduct />} />
