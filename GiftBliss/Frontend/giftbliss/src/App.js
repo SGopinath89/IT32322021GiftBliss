@@ -4,6 +4,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CategoryPage from './Components/CategoryPage';
 import ProductPage from './Components/ProductPage';
 import Login from './Components/Login';
+import ForgotPassword from './Components/ForgotPassword';
+import ForgotPassword1 from './Components/ForgotPassword1';
+import ForgotPassword2 from './Components/ForgotPassword2';
+import ForgotPassword3 from './Components/ForgotPassword3';
+import ForgotPassword4 from './Components/ForgotPassword4';
 import Signup from './Components/Signup';
 import AdminAddProduct from './Components/AdminAddProduct';
 import AdminProductPage from './Components/AdminProductPage';
@@ -19,6 +24,11 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/forgotpassword1" element={<ForgotPassword1 />} />
+          <Route path="/forgotpassword2" element={<ForgotPassword2 />} />
+          <Route path="/forgotpassword3" element={<ForgotPassword3 />} />
+          <Route path="/forgotpassword4" element={<ForgotPassword4 />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/" element={<HomePage />} />
