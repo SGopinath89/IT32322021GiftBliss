@@ -2,8 +2,9 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Chart, CategoryScale, LinearScale, LineController, BarController, PointElement, LineElement, BarElement, Title, Legend, Tooltip } from 'chart.js';
 import { Line, Bar } from 'react-chartjs-2';
-import UserHeader from './UserHeader';
+
 import "../CSS/Dashboard.css";
+import UserHeader from "./UserHeader";
 
 Chart.register(CategoryScale, LinearScale, LineController, BarController, PointElement, LineElement, BarElement, Title, Legend, Tooltip);
 
@@ -31,7 +32,7 @@ const Dashboard = () => {
   const barChartRef3 = useRef(null);
 
   useEffect(() => {
-    // Cleanup function to destroy charts
+    
     return () => {
       if (lineChartRef.current && lineChartRef.current.chartInstance) {
         lineChartRef.current.chartInstance.destroy();
@@ -99,13 +100,13 @@ const Dashboard = () => {
       legend: {
         labels: {
           font: {
-            size: 10, // Change this value to the desired font size for the legend
+            size: 10, 
           },
         },
       },
       tooltip: {
         bodyFont: {
-          size: 10, // Change this value to the desired font size for the tooltip
+          size: 10, 
         },
       },
     },
@@ -119,7 +120,7 @@ const Dashboard = () => {
           
           maxTicksLimit: 25,
           font: {
-            size: 10, // Change this value to the desired font size for the x-axis ticks
+            size: 10, 
           },
         },
       },
@@ -127,22 +128,21 @@ const Dashboard = () => {
         beginAtZero: true,
         ticks: {
           font: {
-            size: 10, // Change this value to the desired font size for the y-axis ticks
+            size: 10, 
           },
         },
       },
     },
-    // If you have a title for your chart
     title: {
       display: true,
       text: 'Earnings Overview',
       font: {
-        size: 10, // Change this value to the desired font size for the title
+        size: 10, 
       },
     },
-    // Adjust the bar thickness here
+    
     dataset: {
-      barThickness: 5, // Change this value to the desired bar thickness
+      barThickness: 5,
     },
   };
 
@@ -201,7 +201,7 @@ const Dashboard = () => {
     </p>
     <Bar ref={barChartRef1} data={barChartData1} options={chartOptions} />
   </div>
-  {/* Add similar code for other column graphs */}
+  
 
 
         <div className="column-graph" style={{ height: '300px', width: '20%' }}>
@@ -304,4 +304,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
