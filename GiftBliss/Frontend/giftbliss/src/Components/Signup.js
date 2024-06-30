@@ -1,14 +1,46 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import '../CSS/Signup.css';
 
 function Signup() {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({ fullName: '', email: '', password: '', confirmPassword: '' });
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+};
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   navigate('/login');
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate('/login');
-  };
+    if (formData.password !== formData.confirmPassword) {
+        setError('Passwords do not match.');
+        return;
+    }
+    try {
+        const response = await axios.post('http://localhost:8080/user/signup', {
+          fullname: formData.fullName,
+          email: formData.email,
+          password: formData.password
+        });
+        
+        if (response.data.status === 'success') {
+          navigate('/signin');
+        } else {
+          setError(response.data.message);
+        }
+    } catch (error) {
+        setError('Error occurred. Please try again.');
+        console.error(error);
+    }
+};
 
   return (
     <div className="signup-container">
@@ -25,14 +57,15 @@ function Signup() {
       <div className="right-section">
         <h2>Create Account</h2>
         <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="Full Name" required />
-          <input type="email" placeholder="Email Address" required />
-          <input type="password" placeholder="Password" required />
-          <input type="password" placeholder="Conform Password" required />
+          <input type="text" name="fullName" placeholder="Full Name" value={formData.fullName} onChange={handleChange}  required />
+          <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange}required />
+          <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange}required />
+          <input type="password" name="confirmPassword" placeholder="Conform Password" value={formData.confirmPassword} onChange={handleChange} required />
+          {error && <p className="error">{error}</p>}
           <button type="submit">Create Account</button>
         </form>
         <p>
-          Already have an account? <a href="/login">Login</a>
+          Already have an account? <a href="/signin">Login</a>
         </p>
       </div>
     </div>
