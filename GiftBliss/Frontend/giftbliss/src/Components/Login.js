@@ -1,13 +1,38 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import '../CSS/Login.css';
 
 const Login = () => {
     const navigate = useNavigate();
+    const [formData, setFormData] = useState({ username: '', password: '' });
+    const [error, setError] = useState('');
 
-    const handleSignIn = (e) => {
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSignIn = async (e) => {
         e.preventDefault();
-        navigate('/home');
+        
+        // Check for hardcoded credentials
+        if (formData.username === 'admin' && formData.password === '1234') {
+            navigate('/dashboard');
+            return;
+        }
+
+        try {
+            const response = await axios.post('http://localhost:8080/user/signin', {
+                email: formData.username,
+                password: formData.password
+            });
+            // Handle successful sign-in
+            console.log(response.data);
+            navigate('/home');
+        } catch (error) {
+            setError('Invalid credentials. Please try again.');
+            console.error('Error signing in:', error.response ? error.response.data : error.message);
+        }
     };
 
     const handleSignUp = (e) => {
@@ -30,12 +55,13 @@ const Login = () => {
                 <h2>Sign In</h2>
                 <form id="loginForm" onSubmit={handleSignIn}>
                     <label htmlFor="username">User Name or Email</label>
-                    <input type="text" id="username" name="username" required />
+                    <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} required />
                     <label htmlFor="password">Password</label>
-                    <input type="password" id="password" name="password" required />
+                    <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required />
+                    {error && <p className="error">{error}</p>}
                     <button type="submit">Sign In</button>
                     <div className="links">
-                        <a href="#" className="forget-password">Forget password?</a>
+                        <a href="#" className="forget-password">Forgot password?</a>
                         <a href="#" className="sign-up" onClick={handleSignUp}>Don't you have an account? <span>Sign Up</span></a>
                     </div>
                 </form>
