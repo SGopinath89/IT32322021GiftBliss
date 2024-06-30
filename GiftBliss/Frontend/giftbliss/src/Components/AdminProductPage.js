@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
 import { MdEdit } from "react-icons/md";
 import { RiDeleteBin6Line } from 'react-icons/ri';
@@ -10,9 +11,22 @@ import "../CSS/AdminProductPage.css";
 
 const AdminProductPage = () => {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [selectedTable, setSelectedTable] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
-  const [editProductId, setEditProductId] = useState(null); // State to track the product being edited
+  const [editProductId, setEditProductId] = useState(null);
+  const [editProductDetails, setEditProductDetails] = useState({
+    title: '',
+    description: '',
+    category: '',
+    price: '',
+    date: '',
+    count: '',
+    discount: ''
+  });
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+
   const itemsPerPage = 10;
   const navigate = useNavigate();
 
@@ -21,6 +35,9 @@ const AdminProductPage = () => {
       try {
         const response = await axios.get('http://localhost:8080/api/add_product');
         setProducts(response.data);
+
+        const uniqueCategories = [...new Set(response.data.map(product => product.category))];
+        setCategories(uniqueCategories);
       } catch (error) {
         console.error('Error fetching products:', error);
       }
@@ -33,7 +50,17 @@ const AdminProductPage = () => {
     let filteredProducts = products;
 
     if (selectedTable === 'discount') {
-      filteredProducts = products.filter(product => product.discound !== null && product.discound > 0);
+      filteredProducts = products.filter(product => product.discount !== null && product.discount > 0);
+    }
+
+    if (selectedCategory) {
+      filteredProducts = filteredProducts.filter(product => product.category === selectedCategory);
+    }
+
+    if (searchTerm) {
+      filteredProducts = filteredProducts.filter(product =>
+        product.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
     }
 
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -42,43 +69,88 @@ const AdminProductPage = () => {
   };
 
   const handleNextPage = () => {
-    setCurrentPage(currentPage + 1);
+    setCurrentPage(prevPage => prevPage + 1);
   };
 
   const handlePreviousPage = () => {
-    setCurrentPage(currentPage - 1);
+    setCurrentPage(prevPage => prevPage - 1);
   };
 
   const getTotalItems = () => {
-    return products.length;
-  };
+    let filteredProducts = products;
 
-  const handleEditClick = (productId) => {
-    setEditProductId(productId); // Set the product id being edited
-  };
-
-  const handleSaveEdit = async (editedProduct) => {
-    try {
-      const response = await axios.put(`http://localhost:8080/api/add_product/${editedProduct.id}`, editedProduct);
-      console.log('Product updated successfully:', response.data);
-      setEditProductId(null); // Clear edit mode
-      // Optionally update the local products state or refetch data
-      refreshProducts(); // Refresh products after edit
-    } catch (error) {
-      console.error('Error updating product:', error);
-      // Handle error (e.g., show error message to user)
+    if (selectedTable === 'discount') {
+      filteredProducts = products.filter(product => product.discount !== null && product.discount > 0);
     }
+
+    if (selectedCategory) {
+      filteredProducts = filteredProducts.filter(product => product.category === selectedCategory);
+    }
+
+    if (searchTerm) {
+      filteredProducts = filteredProducts.filter(product =>
+        product.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    return filteredProducts.length;
+  };
+
+  const handleEditClick = (product) => {
+    setEditProductId(product.id);
+    setEditProductDetails({
+      title: product.title,
+      description: product.description,
+      category: product.category,
+      price: product.price,
+      date: product.date,
+      count: product.count,
+      discount: product.discount || ''
+    });
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditProductDetails(prevDetails => ({
+      ...prevDetails,
+      [name]: value
+    }));
+  };
+
+  const handleSaveEdit = async () => {
+    if (!editProductDetails.title || !editProductDetails.description || !editProductDetails.category || !editProductDetails.price || !editProductDetails.date || !editProductDetails.count) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+    console.log('Saving product details:', editProductDetails);
+
+    try {
+      const response = await axios.put(`http://localhost:8080/api/add_product/${editProductId}`, editProductDetails);
+
+      if (response.status === 200) {
+        alert('Product updated successfully!');
+        refreshProducts();
+        setEditProductId(null);
+      } else {
+        throw new Error('Failed to update product.');
+      }
+    } catch (error) {
+      alert('Failed to update product: ' + error.message);
+    }
+  };
+
+  const cancelEdit = () => {
+    setEditProductId(null);
   };
 
   const handleDeleteClick = async (productId) => {
     try {
       const response = await axios.delete(`http://localhost:8080/api/add_product/${productId}`);
       console.log('Product deleted successfully:', response.data);
-      // Remove the deleted product from local state or refetch data
-      refreshProducts(); // Refresh products after delete
+      refreshProducts();
     } catch (error) {
       console.error('Error deleting product:', error);
-      // Handle error (e.g., show error message to user)
     }
   };
 
@@ -86,13 +158,12 @@ const AdminProductPage = () => {
     try {
       const response = await axios.get('http://localhost:8080/api/add_product');
       setProducts(response.data);
+
+      const uniqueCategories = [...new Set(response.data.map(product => product.category))];
+      setCategories(uniqueCategories);
     } catch (error) {
       console.error('Error refreshing products:', error);
     }
-  };
-
-  const cancelEdit = () => {
-    setEditProductId(null); // Cancel editing
   };
 
   const navigateTo = (path) => {
@@ -114,7 +185,12 @@ const AdminProductPage = () => {
 
   const handleTableSelection = (table) => {
     setSelectedTable(table);
-    setCurrentPage(1); // Reset to first page when table selection changes
+    setCurrentPage(1);
+  };
+
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+    setCurrentPage(1);
   };
 
   return (
@@ -142,20 +218,27 @@ const AdminProductPage = () => {
               <button onClick={() => handleTableSelection('all')} className={selectedTable === 'all' ? 'active' : ''}>All Data</button>
               <button onClick={() => handleTableSelection('discount')} className={selectedTable === 'discount' ? 'active' : ''}>On Discount</button>
             </div>
-            
+
             <div className="table-filters">
-              <select>
-                <option value="">Category</option>
-                <option value="Category 1">Category 1</option>
-                <option value="Category 2">Category 2</option>
-                <option value="Category 3">Category 3</option>
+              <select value={selectedCategory} onChange={handleCategoryChange}>
+                <option value="">All Category</option>
+                {categories.map((category, index) => (
+                  <option key={index} value={category}>{category}</option>
+                ))}
               </select>
               <div className="search">
-                <input type="text" placeholder="Search..." />
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
                 <button className='search_button'><FaSearch /></button>
               </div>
-              {/* Add Product button */}
-              <button>Add Product</button>
+              <button >
+                <Link style={{ color: 'white', textDecoration: 'none' }} to='/admin/add_product'>Add Product</Link>
+              </button>
+
             </div>
           </div>
 
@@ -169,7 +252,7 @@ const AdminProductPage = () => {
                   <th>Price</th>
                   <th>Date</th>
                   <th>Count</th>
-                  {selectedTable === 'discount' && <th>Discount</th>}
+                  <th>Discount</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -179,57 +262,75 @@ const AdminProductPage = () => {
                     <td>{editProductId === product.id ? (
                       <input
                         type="text"
-                        value={product.title}
-                        onChange={(e) => {
-                          const newTitle = e.target.value;
-                          setProducts(prevProducts => prevProducts.map(p => p.id === product.id ? { ...p, title: newTitle } : p));
-                        }}
+                        value={editProductDetails.title}
+                        name="title"
+                        onChange={handleInputChange}
                       />
                     ) : product.title}</td>
                     <td>{editProductId === product.id ? (
                       <input
                         type="text"
-                        value={product.description}
-                        onChange={(e) => {
-                          const newDesc = e.target.value;
-                          setProducts(prevProducts => prevProducts.map(p => p.id === product.id ? { ...p, description: newDesc } : p));
-                        }}
+                        value={editProductDetails.description}
+                        name="description"
+                        onChange={handleInputChange}
                       />
                     ) : product.description}</td>
                     <td>{editProductId === product.id ? (
                       <input
                         type="text"
-                        value={product.category}
-                        onChange={(e) => {
-                          const newCategory = e.target.value;
-                          setProducts(prevProducts => prevProducts.map(p => p.id === product.id ? { ...p, category: newCategory } : p));
-                        }}
+                        value={editProductDetails.category}
+                        name="category"
+                        onChange={handleInputChange}
                       />
                     ) : product.category}</td>
                     <td>{editProductId === product.id ? (
                       <input
                         type="text"
-                        value={product.price}
-                        onChange={(e) => {
-                          const newPrice = e.target.value;
-                          setProducts(prevProducts => prevProducts.map(p => p.id === product.id ? { ...p, price: newPrice } : p));
-                        }}
+                        value={editProductDetails.price}
+                        name="price"
+                        onChange={handleInputChange}
                       />
                     ) : product.price}</td>
-                    <td>{product.date}</td>
-                    <td>{product.count}</td>
-                    {selectedTable === 'discount'                      ? <td>{product.discound}</td>
-                      : null
-                    }
+                    <td>{editProductId === product.id ? (
+                      <input
+                        type="text"
+                        value={editProductDetails.date}
+                        name="date"
+                        onChange={handleInputChange}
+                      />
+                    ) : product.date}</td>
+                    <td>{editProductId === product.id ? (
+                      <input
+                        type="text"
+                        value={editProductDetails.count}
+                        name="count"
+                        onChange={handleInputChange}
+                      />
+                    ) : product.count}</td>
+                    <td>
+                      {editProductId === product.id ? (
+                        <input
+                          type="text"
+                          value={editProductDetails.discount}
+                          name="discount"
+                          onChange={handleInputChange}
+                        />
+                      ) : (
+                        <>
+                          {product.discount}%
+                        </>
+                      )}
+                    </td>
+
                     <td>
                       {editProductId === product.id ? (
                         <>
-                          <button onClick={() => handleSaveEdit(product)}>Save</button>
-                          <button onClick={() => cancelEdit()}>Cancel</button>
+                          <button onClick={handleSaveEdit}>Save</button>
+                          <button onClick={cancelEdit}>Cancel</button>
                         </>
                       ) : (
                         <>
-                          <MdEdit onClick={() => handleEditClick(product.id)} style={{ cursor: 'pointer', marginRight: '10px' }} />
+                          <MdEdit onClick={() => handleEditClick(product)} style={{ cursor: 'pointer', marginRight: '10px' }} />
                           <RiDeleteBin6Line onClick={() => handleDeleteClick(product.id)} style={{ cursor: 'pointer', color: 'red' }} />
                         </>
                       )}
@@ -252,4 +353,3 @@ const AdminProductPage = () => {
 };
 
 export default AdminProductPage;
-
