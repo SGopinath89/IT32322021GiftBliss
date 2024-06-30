@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import "../css/ForgotPassword3.css";
+import "../CSS/ForgotPassword3.css";
 
 const ForgotPassword3 = () => {
   const onArrowClick = useCallback(() => {
