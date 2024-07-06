@@ -1,6 +1,8 @@
 import { useState, useCallback } from "react";
 import { FaSearch } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
+import { MdEdit } from 'react-icons/md';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 import { Chart, CategoryScale, LinearScale, LineController, BarController, PointElement, LineElement, BarElement, Title, Legend, Tooltip } from 'chart.js';
 import { Line, Bar } from 'react-chartjs-2';
 import UserHeader from './UserHeader';
@@ -78,8 +80,8 @@ const AdminCustomerPage = () => {
       navigate("/Products");
     }, [navigate]);
   
-    const onAdd_New_ProductTextClick = useCallback(() => {
-      navigate("/Add_New_Product");
+    const onAdd_ProductTextClick = useCallback(() => {
+      navigate("/Add_Product");
     }, [navigate]);
   
     const onCustomersTextClick = useCallback(() => {
@@ -101,6 +103,16 @@ const AdminCustomerPage = () => {
     const onRefundTextClick = useCallback(() => {
       navigate("/Refund");
     }, [navigate]);
+
+    const handleEditClick = (orderId) => {
+        // Your edit logic here
+        console.log(`Edit order ${orderId}`);
+    };
+
+    const handleDeleteClick = (orderId) => {
+        // Your delete logic here
+        console.log(`Delete order ${orderId}`);
+    };
   
     return (
       <div className="Product-container">
@@ -112,7 +124,7 @@ const AdminCustomerPage = () => {
             <br/>
             <div className="menu-item" onClick={onDashboardTextClick}>Dashboard</div>
             <div className="menu-item" onClick={onProductsTextClick}>Products</div>
-            <div className="menu-item" onClick={onAdd_New_ProductTextClick}>Add_New_Product</div>
+            <div className="menu-item" onClick={onAdd_ProductTextClick}>Add Product</div>
             <div className="menu-item" onClick={onCustomersTextClick}>Customers</div>
             <div className="menu-item" onClick={onCustomers_DetailsTextClick}>Customer_Details</div>
             <div className="menu-item" onClick={onOrderTextClick}>Order</div>
@@ -161,9 +173,8 @@ const AdminCustomerPage = () => {
                       <td>{customer.status}</td>
                       <td>{customer.lastOrder}</td>
                       <td>{customer.invoice}</td>
-                      {/* <td>{customer.action}</td> */}
                       <td>
-                            <MdEdit onClick={()=>handleEditClick(customer.orderId)} style={{cursor: 'pointer', marginRight: '10px'}}/>
+                            <MdEdit onClick={() => handleEditClick(customer.orderId)} style={{cursor: 'pointer', marginRight: '10px'}}/>
                             <RiDeleteBin6Line onClick={() => handleDeleteClick(customer.orderId)} style={{ cursor: 'pointer', color: 'red' }}/>
                           </td>
 

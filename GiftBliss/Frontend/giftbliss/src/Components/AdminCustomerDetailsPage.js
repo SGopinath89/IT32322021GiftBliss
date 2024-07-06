@@ -36,15 +36,15 @@ const AdminCustomerDetailsPage = () => {
   const navigate = useNavigate();
 
   const onDashboardTextClick = useCallback(() => {
-    navigate("/");
+    navigate("/dashboard");
   }, [navigate]);
 
   const onProductsTextClick = useCallback(() => {
     navigate("/Products");
   }, [navigate]);
 
-  const onAdd_New_ProductTextClick = useCallback(() => {
-    navigate("/Add_New_Product");
+  const onAdd_ProductTextClick = useCallback(() => {
+    navigate("/Add_Product");
   }, [navigate]);
 
   const onCustomersTextClick = useCallback(() => {
@@ -52,7 +52,7 @@ const AdminCustomerDetailsPage = () => {
   }, [navigate]);
 
   const onCustomers_DetailsTextClick = useCallback(() => {
-    navigate("/Customers_Details");
+    navigate("");
   }, [navigate]);
 
   const onOrderTextClick = useCallback(() => {
@@ -125,7 +125,7 @@ const AdminCustomerDetailsPage = () => {
         <nav className="sidebar">
           <div className="menu-item" onClick={onDashboardTextClick}>Dashboard</div>
           <div className="menu-item" onClick={onProductsTextClick}>Products</div>
-          <div className="menu-item" onClick={onAdd_New_ProductTextClick}>Add_New_Product</div>
+          <div className="menu-item" onClick={onAdd_ProductTextClick}>Add_Product</div>
           <div className="menu-item" onClick={onCustomersTextClick}>Customers</div>
           <div className="menu-item" onClick={onCustomers_DetailsTextClick}>Customer_Details</div>
           <div className="menu-item" onClick={onOrderTextClick}>Order</div>

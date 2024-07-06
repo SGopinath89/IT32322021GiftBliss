@@ -103,23 +103,23 @@ const AdminAddProduct = () => {
   };
 
   return (
-    <div className="CDetails-container">
+    <div className="addproduct-container">
       <UserHeader />
-      <div className="content-wrapper">
-        <nav className="sidebar">
-          <div className="menu-item" onClick={() => handleNavigation("/")}>Dashboard</div>
+      <div className="content-wrapper1">
+        <nav className="sidebar1">
+          <div className="menu-item" onClick={() => handleNavigation("/dashboard")}>Dashboard</div>
           <div className="menu-item" onClick={() => handleNavigation("/Products")}>Products</div>
-          <div className="menu-item" onClick={() => handleNavigation("/Add_New_Product")}>Add New Product</div>
+          <div className="menu-item" onClick={() => handleNavigation("/Add_Product")}>Add Product</div>
           <div className="menu-item" onClick={() => handleNavigation("/Customers")}>Customers</div>
           <div className="menu-item" onClick={() => handleNavigation("/Customers_Details")}>Customer Details</div>
           <div className="menu-item" onClick={() => handleNavigation("/Order")}>Order</div>
           <div className="menu-item" onClick={() => handleNavigation("/Order_details")}>Order Details</div>
           <div className="menu-item" onClick={() => handleNavigation("/Refund")}>Refund</div>
         </nav>
-        <div className="main-content">
-          <div className="right-content">
-            <div className="column-container">
-              <p>Upload image</p>
+        <div className="main-content1">
+          <div className="right-content1">
+            <div className="column-container1">
+              <p>Upload Image</p>
               <div
                 className={`image-upload ${dragActive ? "drag-active" : ""}`}
                 onDragEnter={handleDrag}
@@ -128,11 +128,11 @@ const AdminAddProduct = () => {
                 onDrop={handleDrop}
               >
                 {!selectedImage && (
-                  <div className="upload-box">
+                  <div className="upload-box1">
                     <p>Drag & Drop your files or</p>
                   </div>
                 )}
-                {selectedImage && <img src={selectedImage} alt="Selected" className="uploaded-image" />}
+                {selectedImage && <img src={selectedImage} alt="Selected" className="uploaded-image1" />}
                 <label htmlFor="fileInput" className="file-label">Choose File</label>
                 <input
                   type="file"
@@ -144,8 +144,8 @@ const AdminAddProduct = () => {
               </div>
             </div>
           </div>
-          <div className="item-details">
-            <div className="form-group">
+          <div className="item-details1">
+            <div className="form-group1">
               <label>Title</label>
               <input
                 type="text"
@@ -154,7 +154,7 @@ const AdminAddProduct = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="form-group">
+            <div className="form-group1">
               <label>Description</label>
               <textarea
                 name="description"
@@ -162,7 +162,7 @@ const AdminAddProduct = () => {
                 onChange={handleDescriptionChange}
               ></textarea>
             </div>
-            <div className="form-group">
+            <div className="form-group1">
               <label>Category</label>
               <select
                 name="category"
@@ -191,7 +191,7 @@ const AdminAddProduct = () => {
                 <option value="Fragrance">Fragrance</option>
               </select>
             </div>
-            <div className="form-group">
+            <div className="form-group1">
               <label>Product Date</label>
               <input
                 type="date"
@@ -200,9 +200,10 @@ const AdminAddProduct = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="form-group">
+            <div className="form-group1">
               <label>Price ($)</label>
               <div className="dollar-input">
+                <span>$</span>
                 <input
                   type="number"
                   name="price"
@@ -211,7 +212,7 @@ const AdminAddProduct = () => {
                 />
               </div>
             </div>
-            <div className="form-group">
+            <div className="form-group1">
               <label>Gender</label>
               <select
                 name="gender"
@@ -224,7 +225,7 @@ const AdminAddProduct = () => {
                 <option value="other">Other</option>
               </select>
             </div>
-            <div className="form-group">
+            <div className="form-group1">
               <label>Size</label>
               <input
                 type="text"
@@ -233,7 +234,7 @@ const AdminAddProduct = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="form-group">
+            <div className="form-group1">
               <label>Count</label>
               <input
                 type="number"
@@ -243,13 +244,13 @@ const AdminAddProduct = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="form-actions">
+            <div className="form-actions1">
               <button onClick={handleAddProduct}>Add Product</button>
-             
-              <button>Save Product</button> 
+              <button onClick={handleAddProduct}>save product</button>
+              {/* Add Save Product button or other actions here */}
             </div>
           </div>
-          <div className="details">
+          <div className="details1">
             {selectedImage && <img className="image" alt="Product" src={itemDetails.image} />}
             <h4>Title</h4>
             <h5>{itemDetails.title}</h5>
@@ -257,9 +258,9 @@ const AdminAddProduct = () => {
               {itemDetails.description}
             </p>
             <p>Product Date: {itemDetails.date}</p>
-            <p>For this product: {itemDetails.gender}</p>
+            <p>Gender: {itemDetails.gender}</p>
             <p>Size: {itemDetails.size}</p>
-            <p>This retails for: ${itemDetails.price}</p>
+            <p>Price: ${itemDetails.price}</p>
           </div>
         </div>
       </div>

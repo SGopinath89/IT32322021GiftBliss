@@ -6,32 +6,32 @@
     font-family: Arial, sans-serif;
   }
   
-  .Heading {
+  .Heading1 {
     padding: 20px;
   }
   
-  .Heading h1 {
+  .Heading1 h1 {
     margin: 0;
     font-size: 24px;
   }
   
-  .page-title {
+  .page-title1 {
     margin-top: 5px;
     font-size: 14px;
     color: #555;
   }
   
-  .page-title .select {
+  .page-title1 .select {
     font-weight: bold;
     color: #000;
   }
   
-  .page-content {
+  .page-content2 {
     display: flex;
     padding: 0px;
   }
   
-  .sidebar {
+  .sidebar2 {
     width: 200px;
     padding: 10px;
     background-color: #f8f8f8;
@@ -50,7 +50,7 @@
     background-color: #ddd;
   }
   
-  .table-controls {
+  .table-controls2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -58,12 +58,12 @@
     padding: 10px 20px;
   }
   
-  .table-selection {
+  .table-selection2 {
     display: flex;
     gap: 10px;
   }
   
-  .table-selection button {
+  .table-selection2 button {
     padding: 10px 15px;
     cursor: pointer;
     background-color: #007bff;
@@ -72,23 +72,25 @@
     border-radius: 4px;
   }
   
-  .table-selection button:hover {
+  .table-selection2 button:hover {
     background-color: #0056b3;
   }
   
-  .table-filters {
+  .table-filters2 {
     display: flex;
     gap: 10px;
   }
   
-  .table-filters select,
-  .table-filters input {
+  .table-filters2 select,
+  .table-filters2 input {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    height: 20px;
+    margin-top: 110px;
   }
   
-  .table-filters button {
+  .table-filters2 button {
     padding: 10px 15px;
     cursor: pointer;
     background-color: #0056b3;
@@ -97,20 +99,21 @@
     border-radius: 4px;
   }
   
-  .table-filters button:hover {
+  .table-filters2 button:hover {
     background-color: #0056b3;
   }
   
-  .Table {
+  
+  .Table1 {
     width: 100%;
     padding: 20px;
   }
   
-  .table-section {
+  .table-section2 {
     width: 100%;
   }
   
-  .table-section p {
+  .table-section2 p {
     font-size: 16px;
     margin-bottom: 10px;
   }
@@ -140,13 +143,13 @@
     border-bottom: 1px solid #ddd;
   }
   
-  .pagination {
+  .pagination2 {
     display: flex;
     justify-content: right;
     gap: 5px;
   }
   
-  .pagination button {
+  .pagination2 button {
     padding: 10px 15px;
     cursor: pointer;
     background-color: #007bff;
@@ -155,12 +158,12 @@
     border-radius: 4px;
   }
   
-  .pagination button:disabled {
+  .pagination2 button:disabled {
     background-color: #ddd;
     cursor: not-allowed;
   }
   
-  .pagination button:hover:not(:disabled) {
+  .pagination2 button:hover:not(:disabled) {
     background-color: #0056b3;
   }
   

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "./UserHeader";
 //import Footer from "./Footer";
 import "../CSS/ContactUs.css";
+import Footer from "./Footer";
 
 const ContactUs = () => {
   const navigate = useNavigate();

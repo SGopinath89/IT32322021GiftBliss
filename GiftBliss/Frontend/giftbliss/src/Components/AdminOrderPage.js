@@ -5,7 +5,7 @@ import { Chart, CategoryScale, LinearScale, LineController, BarController, Point
 import { Line, Bar } from 'react-chartjs-2';
 import UserHeader from './UserHeader';
 import Footer from "./Footer";
-import "./AdminOrderPage.css";
+import "../CSS/AdminOrderPage.css";
 
 Chart.register(CategoryScale, LinearScale, LineController, BarController, PointElement, LineElement, BarElement, Title, Legend, Tooltip);
 
@@ -64,10 +64,7 @@ const ReturnsData = [
     { orderId: 45, customer: "William", total: "$450", date: "2024-07-15", type: "Online Order", status: "Shipped", action: "View" }
 ];
 
-
-    
-   
-    
+const [detailsData, setDetailsData] = useState(AllData);
 
   const navigate = useNavigate();
 
@@ -79,8 +76,8 @@ const ReturnsData = [
     navigate("/Products");
   }, [navigate]);
 
-  const onAdd_New_ProductTextClick = useCallback(() => {
-    navigate("/Add_New_Product");
+  const onAdd_ProductTextClick = useCallback(() => {
+    navigate("/Add_Product");
   }, [navigate]);
 
   const onCustomersTextClick = useCallback(() => {
@@ -168,92 +165,86 @@ const ReturnsData = [
 
   const handleDeleteClick = (orderId) => {
     // Handle delete logic, for example, update state to remove the item
-    setDetailsData(DetailsData.filter(item => item.orderId !== orderId));
+    setDetailsData(detailsData.filter(item => item.orderId !== orderId));
   };
-
 
   return (
     <div className="Product-container">
       <UserHeader />
-     
-
       <div className="page-content">
         <nav className="sidebar">
-        <br/>
-        <br/>
+          <br/>
+          <br/>
           <div className="menu-item" onClick={onDashboardTextClick}>Dashboard</div>
           <div className="menu-item" onClick={onProductsTextClick}>Products</div>
-          <div className="menu-item" onClick={onAdd_New_ProductTextClick}>Add_New_Product</div>
+          <div className="menu-item" onClick={onAdd_ProductTextClick}>Add Product</div>
           <div className="menu-item" onClick={onCustomersTextClick}>Customers</div>
-          <div className="menu-item" onClick={onCustomers_DetailsTextClick}>Customer_Details</div>
+          <div className="menu-item" onClick={onCustomers_DetailsTextClick}>Customer Details</div>
           <div className="menu-item" onClick={onOrderTextClick}>Order</div>
-          <div className="menu-item" onClick={onOrder_DetailsTextClick}>Order_Details</div>
+          <div className="menu-item" onClick={onOrder_DetailsTextClick}>Order Details</div>
           <div className="menu-item" onClick={onRefundTextClick}>Refund</div>
         </nav>
-
         <div className="Table">
-        <div className="Heading">
-        <h1>Products</h1>
-        <p className="page-title">GiftBliss/ <span className="select">Products</span></p>
-      </div>
-      <div className="table-controls">
-        <div className="table-selection">
-          <button onClick={() => handleTableSelection('all')} className={selectedTable === 'all' ? 'active' : ''}>All Data</button>
-          <button onClick={() => handleTableSelection('Pending')} className={selectedTable === 'published' ? 'active' : ''}>Pending</button>
-          <button onClick={() => handleTableSelection('Returns')} className={selectedTable === 'discount' ? 'active' : ''}>Returns</button>
-        </div>
-        <div className="table-filters">
-         
-          <div className="search">
-          <input type="text" placeholder="Search..." />
-          <button className='search_button'><FaSearch /></button>
+          <div className="Heading">
+            <h1>Products</h1>
+            <p className="page-title">GiftBliss / <span className="select">Products</span></p>
           </div>
-          
+          <div className="table-controls">
+            <div className="table-selection">
+              <button onClick={() => handleTableSelection('all')} className={selectedTable === 'all' ? 'active' : ''}>All Data</button>
+              <button onClick={() => handleTableSelection('Pending')} className={selectedTable === 'Pending' ? 'active' : ''}>Pending</button>
+              <button onClick={() => handleTableSelection('Returns')} className={selectedTable === 'Returns' ? 'active' : ''}>Returns</button>
+            </div>
+            <div className="table-filters">
+              <div className="search">
+                <input type="text" placeholder="Search..." />
+                <button className='search_button'><FaSearch /></button>
+              </div>
+            </div>
+          </div>
+          <div className="table-section">
+            <table>
+              <thead>
+                <tr>
+                  <th>OrderId</th>
+                  <th>Customer</th>
+                  <th>Total</th>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {getCurrentTableData().map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.orderId}</td>
+                    <td>{item.customer}</td>
+                    <td>{item.total}</td>
+                    <td>{item.date}</td>
+                    <td>{item.type}</td>
+                    <td>{item.status}</td>
+                    <td>
+                      <button onClick={() => handleEditClick(item.orderId)}>Edit</button>
+                      <button onClick={() => handleDeleteClick(item.orderId)}>Delete</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="abc">
+              <div className="pnumber"><p>Showing: {getCurrentTableData().length} in {getTotalItems()}</p></div>
+              <div className="pagination">
+                <button onClick={handlePreviousPage} disabled={currentPage === 1}>Previous</button>
+                {renderPageNumbers()}
+                <button onClick={handleNextPage} disabled={currentPage * itemsPerPage >= getTotalItems()}>Next</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div className="table-section">
-        <table>
-          <thead>
-            <tr>
-              <th>OrderId</th>
-              <th>Customer</th>
-              <th>Total</th>
-              <th>Date</th>
-              <th>Type</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {getCurrentTableData().map((item, index) => (
-              <tr key={index}>
-                <td>{item.orderId}</td>
-                <td>{item.customer}</td>
-                <td>{item.total}</td>
-                <td>{item.date}</td>
-                <td>{item.type}</td>
-                <td>{item.status}</td>
-                <td>{item.action}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className="abc">
-        <div className="pnumber"><p>showing:{getCurrentTableData().length} in {getTotalItems()}</p></div>
-        <div className="pagination">
-          <button onClick={handlePreviousPage} disabled={currentPage === 1}>Previous</button>
-          {renderPageNumbers()}
-          <button onClick={handleNextPage} disabled={currentPage * itemsPerPage >= getTotalItems()}>Next</button>
-        </div>
-        </div>
-        
-        
-      </div>
+      <Footer/>
     </div>
-  </div>
-  <Footer/>
-</div>
   );
 };
 

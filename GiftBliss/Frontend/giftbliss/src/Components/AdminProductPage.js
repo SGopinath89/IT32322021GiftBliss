@@ -196,9 +196,9 @@ const AdminProductPage = () => {
   return (
     <div className="Product-container">
       <UserHeader />
-      <div className="page-content">
-        <nav className="sidebar">
-          <div className="menu-item" onClick={() => navigateTo("/")}>Dashboard</div>
+      <div className="page-content2">
+        <nav className="sidebar2">
+          <div className="menu-item" onClick={() => navigateTo("/dashboard")}>Dashboard</div>
           <div className="menu-item" onClick={() => navigateTo("/Products")}>Products</div>
           <div className="menu-item" onClick={() => navigateTo("/Add_New_Product")}>Add New Product</div>
           <div className="menu-item" onClick={() => navigateTo("/Customers")}>Customers</div>
@@ -208,24 +208,26 @@ const AdminProductPage = () => {
           <div className="menu-item" onClick={() => navigateTo("/Refund")}>Refund</div>
         </nav>
 
-        <div className="Table">
-          <div className="Heading">
+        <div className="Table1">
+          <div className="Heading1">
             <h1>Products</h1>
-            <p className="page-title">GiftBliss / <span className="select">Products</span></p>
+            <p className="page-title1">GiftBliss / <span className="select">Products</span></p>
           </div>
-          <div className="table-controls">
-            <div className="table-selection">
+          <div className="table-controls2">
+            <div className="table-selection2">
               <button onClick={() => handleTableSelection('all')} className={selectedTable === 'all' ? 'active' : ''}>All Data</button>
               <button onClick={() => handleTableSelection('discount')} className={selectedTable === 'discount' ? 'active' : ''}>On Discount</button>
             </div>
 
-            <div className="table-filters">
+            <div className="table-filters2">
+           
               <select value={selectedCategory} onChange={handleCategoryChange}>
                 <option value="">All Category</option>
                 {categories.map((category, index) => (
                   <option key={index} value={category}>{category}</option>
                 ))}
               </select>
+             
               <div className="search">
                 <input
                   type="text"
@@ -242,7 +244,7 @@ const AdminProductPage = () => {
             </div>
           </div>
 
-          <div className="table-section">
+          <div className="table-section2">
             <table>
               <thead>
                 <tr>
@@ -339,7 +341,7 @@ const AdminProductPage = () => {
                 ))}
               </tbody>
             </table>
-            <div className="pagination">
+            <div className="pagination2">
               <button onClick={handlePreviousPage} disabled={currentPage === 1}>Previous</button>
               {renderPageNumbers()}
               <button onClick={handleNextPage} disabled={currentPage * itemsPerPage >= getTotalItems()}>Next</button>

@@ -76,13 +76,13 @@ const AdminRefundPage = () => {
   const total = subTotal + shippingCharge;
 
   return (
-    <div className="CDetails-container">
+    <div className="CDetails-container3">
       <UserHeader />
-      <div className="content-wrapper">
-        <nav className="sidebar">
+      <div className="content-wrapper3">
+        <nav className="sidebar3">
           <div className="menu-item" onClick={onNavigate("/")}>Dashboard</div>
           <div className="menu-item" onClick={onNavigate("/Products")}>Products</div>
-          <div className="menu-item" onClick={onNavigate("/Add_New_Product")}>Add New Product</div>
+          <div className="menu-item" onClick={onNavigate("/Add_Product")}>Add New Product</div>
           <div className="menu-item" onClick={onNavigate("/Customers")}>Customers</div>
           <div className="menu-item" onClick={onNavigate("/Customers_Details")}>Customer Details</div>
           <div className="menu-item" onClick={onNavigate("/Order")}>Order</div>
@@ -90,31 +90,31 @@ const AdminRefundPage = () => {
           <div className="menu-item" onClick={onNavigate("/Refund")}>Refund</div>
         </nav>
         <div className="abc">
-          <div className="Heading">
+          <div className="Heading3">
             <h1>Refund :#</h1>
-            <p className="page-title">GiftBliss/ <span className="select">Refund</span></p>
+            <p className="page-title3">GiftBliss/ <span className="select">Refund</span></p>
           </div>
-          <div className="main-content">
-            <div className="right-content">
-              <div className="column-container">
+          <div className="main-content3">
+            <div className="right-content3">
+              <div className="column-container3">
 
               </div>
-              <div className="Table">
-                <div className="customer-info">
+              <div className="Table3">
+                <div className="customer-info3">
                   <FaUserCircle className="icon" style={{ color: 'blue' }} />
                   <div>
                     <h3>{selectedOrder ? selectedOrder.customerName : "Customer Name"}</h3>
                     <h6>{selectedOrder ? `Customer id: ${selectedOrder.customerId}` : "Customer id:"}</h6>
                   </div>
                 </div>
-                <div className="table-filters">
+                <div className="table-filters3">
                   <select>
                     <option value="">All</option>
                     <option value="Completed">Completed</option>
                     <option value="Pending">Pending</option>
                   </select>
                 </div>
-                <div className="table-section">
+                <div className="table-section3">
                   <table>
                     <thead>
                       <tr>
@@ -143,10 +143,10 @@ const AdminRefundPage = () => {
                     </tbody>
                   </table>
                   <div className="xyz">
-                    <div className="pnumber">
+                    <div className="pnumber3">
                       <p>Showing: {getCurrentTableData().length} of {getTotalItems()}</p>
                     </div>
-                    <div className="pagination">
+                    <div className="pagination3">
                       <button onClick={() => handlePageChange(-1)} disabled={currentPage === 1}>Previous</button>
                       {renderPageNumbers()}
                       <button onClick={() => handlePageChange(1)} disabled={currentPage * itemsPerPage >= getTotalItems()}>Next</button>
@@ -155,16 +155,16 @@ const AdminRefundPage = () => {
                 </div>
               </div>
             </div>
-            <div className="details">
-              <div className="column-graph">
-                <div className="id">
-                  <div className="total">
-                    <div className="total-left">
+            <div className="details3">
+              <div className="column-graph3">
+                <div className="id3">
+                  <div className="total3">
+                    <div className="total-left3">
                       <p>Sub Total</p>
                       <p>Shipping Charge</p>
                       <p>Total</p>
                     </div>
-                    <div className="total-right">
+                    <div className="total-right3">
                       <p>${subTotal.toFixed(2)}</p>
                       <p>${shippingCharge.toFixed(2)}</p>
                       <p>${total.toFixed(2)}</p>
@@ -177,19 +177,22 @@ const AdminRefundPage = () => {
                   </div>
                 </div>
               </div>
-              <div className="form-group">
+              <div className="refund">
+              <div className="form-group3">
                 <label>Amount ($)</label>
                 <div className="dollar-input">
                   <input type="number" placeholder="Price" />
                 </div>
               </div>
-              <div className="form-group">
+              <div className="form-group3">
                 <label>Reply</label>
                 <textarea placeholder="Reply"></textarea>
               </div>
+              
               <div className="button">
                 <button>Refund</button>
                 <button>Decline</button>
+              </div>
               </div>
             </div>
           </div>

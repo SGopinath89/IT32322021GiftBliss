@@ -4,11 +4,11 @@
   width: 100%;
 }
 
-.content-wrapper {
+.content-wrapper1{
   display: flex;
 }
 
-.sidebar {
+.sidebar1 {
   width: 20%;
   background-color: #f4f4f4;
   padding: 20px;
@@ -26,7 +26,7 @@
   color: white;
 }
 
-.main-content {
+.main-content1 {
   display: flex;
   justify-content: center; /* Center align items horizontally */
   gap: 40px;
@@ -34,9 +34,9 @@
   width: 100%;
 }
 
-.right-content,
+.right-content1,
 .item-details,
-.details {
+.details1 {
   flex: 1; /* Ensure equal width */
   display: flex;
   flex-direction: column;
@@ -47,7 +47,7 @@
   align-items: flex-start; /* Align items to the left */
 }
 
-.details img {
+.details1 img {
   display: block;
   margin: 0 auto;
 }
@@ -86,11 +86,11 @@
   background-color: #f0f0f0;
 }
 
-.upload-box {
+.upload-box1 {
   cursor: pointer;
 }
 
-.uploaded-image {
+.uploaded-image1 {
   width: 150px;
   height: 150px;
   margin-top: 10px;
@@ -109,25 +109,25 @@
   bottom: -35px;
 }
 
-.item-details {
+.item-details1 {
   width: 60%;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.form-group {
+.form-group1 {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.form-group label {
+.form-group1 label {
   font-weight: bold;
 }
 
-.form-group input,
-.form-group select {
+.form-group1 input,
+.form-group1 select {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -144,12 +144,12 @@ textarea {
   border-radius: 4px;
 }
 
-.form-actions {
+.form-actions1 {
   display: flex;
   gap: 10px;
 }
 
-.form-actions button {
+.form-actions1 button {
   padding: 10px 20px;
   background-color: #007bff;
   color: white;
@@ -158,7 +158,7 @@ textarea {
   cursor: pointer;
 }
 
-.form-actions button:hover {
+.form-actions1 button:hover {
   background-color: #0056b3;
 }
 
@@ -168,8 +168,8 @@ textarea {
   border-radius: 20px;
 }
 
-.details h4,
-.details h5 {
+.details1 h4,
+.details1 h5 {
   text-align: center;
 }
 
