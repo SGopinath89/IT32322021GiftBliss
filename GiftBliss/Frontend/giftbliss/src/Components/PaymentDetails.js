@@ -1,31 +1,87 @@
-import React, { useState }from 'react'
+import React, { useState , useEffect }from 'react'
 import { MdOutlineMail } from 'react-icons/md'
 import Box from '@mui/material/Box';
+// import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { FaCreditCard, FaLongArrowAltLeft } from 'react-icons/fa';
+// import { Input, MenuItem, Select } from '@mui/material';
 import { RiSecurePaymentFill } from 'react-icons/ri';
 import '../CSS/PaymentDetails.css';
 import { IoMdInformationCircleOutline } from 'react-icons/io';
+import axios from 'axios';
 
 // npm install @mui/material @emotion/react @emotion/styled
 
 const PaymentDetails = () => {
   const [selectedCard, setSelectedCard] = useState('');
-  const [selectedItem, setSelectedItem] = useState(null);
+  // const [selectedItem, setSelectedItem] = useState(null);
+  const [items, setItems] = useState([]);
+  const [paymentDetails, setPaymentDetails] = useState({
+    email: '',
+    cardType: '',
+    cardNumber: '',
+    expiration: '',
+    cvv: ''
+  });
+
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/api/items')
+      .then(response => setItems(response.data))
+      .catch(error => console.error('Error fetching items:', error));
+  }, []);
 
   const handleCardSelect = (cardType) => {
     setSelectedCard(cardType);
+    setPaymentDetails({ ...paymentDetails, cardType });
   };
 
-  const handleItemSelect = (item) => {
-    setSelectedItem(item);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setPaymentDetails({ ...paymentDetails, [name]: value });
   };
 
-  const items = [
-    { id: 1, name: 'Item 1', price: 50 },
-    { id: 2, name: 'Item 2', price: 70 },
-    { id: 3, name: 'Item 3', price: 90 },
-  ];
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   axios.post('http://localhost:8080/api/payment', paymentDetails)
+  //     .then(response => alert(response.data))
+  //     .catch(error => console.error('Error processing payment:', error));
+  // };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:8080/api/payments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(paymentDetails),
+      });
+      if (response.ok) {
+        setPaymentSuccess(true);
+        console.log('Payment successful');
+      } else {
+        console.error('Payment failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  const totalPrice = items.reduce((sum, item) => sum + item.price, 0);
+
+  // const handleItemSelect = (item) => {
+  //   setSelectedItem(item);
+  // };
+
+  // const items = [
+  //   { id: 1, name: 'Item 1', price: 50 },
+  //   { id: 2, name: 'Item 2', price: 70 },
+  //   { id: 3, name: 'Item 3', price: 90 },
+  // ];
 
   return (
     <div className='paymentDetails'>
@@ -39,7 +95,12 @@ const PaymentDetails = () => {
           </div>
 
           <div className='paymentDetailsform' >
-            <form>
+          {paymentSuccess ? (
+              <div className='successMessage'>
+                <h2>Payment successfully processed</h2>
+              </div>
+            ) : (
+            <form onSubmit={handleSubmit}>
               <div>
                 <h2>Payment details</h2>
                 <p>Complete Your Purchase by providing payment details here</p>
@@ -53,7 +114,7 @@ const PaymentDetails = () => {
                       <input type='email' ></input> */}
                       <div className="input-container">
                           <MdOutlineMail className="icon" />
-                          <input type="email" className="input-field"  />
+                          <input type="email" className="input-field" name='email' value={paymentDetails.email} onChange={handleInputChange} required/>
                       </div>
                     </div>
                     <div className='cardtype'>
@@ -95,7 +156,7 @@ const PaymentDetails = () => {
                       <label className='label'>Card Number</label>
                       <div className="input-container">
                         <FaCreditCard className='icon'/>
-                        <input type='text' className="input-field" ></input>
+                        <input type='text' className="input-field" name='cardNumber' value={paymentDetails.cardNumber} onChange={handleInputChange} required></input>
                       </div>
                       
                     </div>
@@ -114,7 +175,7 @@ const PaymentDetails = () => {
                     <div className='expiration-cvv'>
                       <div className='expiration'>
                         <label>Expiration</label>
-                        <input type='month' className="input-field"></input>
+                        <input type='month' className="input-field" name='expiration' value={paymentDetails.expiration} onChange={handleInputChange} required></input>
                       </div>
                       <div className='cvv'>
                         <label>CVV</label>
@@ -122,7 +183,7 @@ const PaymentDetails = () => {
                             <IoMdInformationCircleOutline className='cvvicon'/>
                         </div>
                         <div className="input-container">
-                          <input type='text' className="input-field"></input> 
+                          <input type='text' className="input-field" name='cvv' value={paymentDetails.cvv} onChange={handleInputChange} required></input> 
                         </div>
                       </div>
                     </div>
@@ -134,6 +195,7 @@ const PaymentDetails = () => {
                 </Box> 
               </div>
             </form>
+            )}
           </div>
         </div>
       </div>
@@ -170,6 +232,15 @@ const PaymentDetails = () => {
             </>
           )}
         </div> */}
+         <h2>Items</h2>
+        <ul>
+          {items.map(item => (
+            <li key={item.id}>
+              {item.name} - ${item.price}
+            </li>
+          ))}
+        </ul>
+        <h3>Total: ${totalPrice}</h3>
       </div>
     </div>
   )
