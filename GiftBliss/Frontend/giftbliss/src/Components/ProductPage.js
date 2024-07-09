@@ -1,11 +1,9 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams ,useNavigate } from 'react-router-dom';
 import '../CSS/ProductPage.css';
-
+import Footer from '../Components/Footer';
+import UserHeader from '../Components/UserHeader';
 import { IoIosArrowRoundBack } from 'react-icons/io';
-import Footer from './Footer';
-import UserHeader from './UserHeader';
-
 
 const productDetails = {
   art: [
@@ -323,20 +321,21 @@ const productDetails = {
     { src: '/images/ToysSub/remote/5.webp', name: 'RC Rock Crawler', description: 'Heavy-duty remote-controlled rock crawler for off-road adventures.', price: '$69.99', shippingPrice: '$6.49' },
     { src: '/images/ToysSub/remote/6.webp', name: 'Transformer RC Car', description: 'RC car that transforms into a robot, combining action and vehicle play.', price: '$89.99', shippingPrice: '$7.99' },
   ],
-  
-  
-  
-
   // Similarly add details for other categories and products
 };
 
 const ProductPage = () => {
   const { category, productName } = useParams();
+  const navigate = useNavigate();// Initialize useHistory
   const product = productDetails[category]?.find(p => p.name.toLowerCase().replace(/\s+/g, '-') === productName);
 
   if (!product) {
     return <div>Product not found</div>;
   }
+
+  const handleOrderClick = () => {
+    navigate('/payment-details'); // Navigate to the PaymentDetails page
+  };
 
   return (
     <div>
@@ -352,7 +351,7 @@ const ProductPage = () => {
             <p className="product-description">{product.description}</p>
             <p className="product-price"> {product.price}</p>
             <p className="product-shipping-price">Shipping : {product.shippingPrice}</p>
-            <button className="order-button">ORDER</button>
+            <button className="order-button" onClick={handleOrderClick}>ORDER</button>
           </div>
         </div>
       </div>
