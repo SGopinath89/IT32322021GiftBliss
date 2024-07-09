@@ -200,7 +200,7 @@ const AdminProductPage = () => {
         <nav className="sidebar2">
           <div className="menu-item" onClick={() => navigateTo("/dashboard")}>Dashboard</div>
           <div className="menu-item" onClick={() => navigateTo("/Products")}>Products</div>
-          <div className="menu-item" onClick={() => navigateTo("/Add_New_Product")}>Add New Product</div>
+          <div className="menu-item" onClick={() => navigateTo("/Add_Product")}>Add Product</div>
           <div className="menu-item" onClick={() => navigateTo("/Customers")}>Customers</div>
           <div className="menu-item" onClick={() => navigateTo("/Customers_Details")}>Customer Details</div>
           <div className="menu-item" onClick={() => navigateTo("/Order")}>Order</div>

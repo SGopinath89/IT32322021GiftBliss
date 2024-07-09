@@ -21,27 +21,29 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-        setError('Passwords do not match.');
-        return;
+      setError('Passwords do not match.');
+      return;
     }
     try {
-        const response = await axios.post('http://localhost:8080/user/signup', {
-          fullname: formData.fullName,
-          email: formData.email,
-          password: formData.password
-        });
-        
-        if (response.data.status === 'success') {
-          navigate('/signin');
-        } else {
-          setError(response.data.message);
-        }
+      const response = await axios.post('http://localhost:8080/user/signup', {
+        fullname: formData.fullName,
+        email: formData.email,
+        password: formData.password
+      });
+      
+      if (response.data.status === 'success') {
+        navigate('/Login');
+        // Clear form after successful submission
+        setFormData({ fullName: '', email: '', password: '', confirmPassword: '' });
+      } else {
+        setError(response.data.message);
+      }
     } catch (error) {
-        setError('Error occurred. Please try again.');
-        console.error(error);
+      setError('Error occurred. Please try again.');
+      console.error('Signup failed:', error); // Log the detailed error for debugging
     }
-};
-
+  };
+  
   return (
     <div className="signup-container">
       <div className="left-section">
@@ -65,7 +67,7 @@ function Signup() {
           <button type="submit">Create Account</button>
         </form>
         <p>
-          Already have an account? <a href="/signin">Login</a>
+          Already have an account? <a href="/Login">Login</a>
         </p>
       </div>
     </div>

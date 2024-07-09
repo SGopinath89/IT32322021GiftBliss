@@ -28,7 +28,7 @@ const Login = () => {
             });
             // Handle successful sign-in
             console.log(response.data);
-            navigate('/home');
+            navigate('/');
         } catch (error) {
             setError('Invalid credentials. Please try again.');
             console.error('Error signing in:', error.response ? error.response.data : error.message);

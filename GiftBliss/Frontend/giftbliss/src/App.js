@@ -21,6 +21,7 @@ import ForgotPassword1 from './Components/ForgotPassword1';
 import ForgotPassword2 from './Components/ForgotPassword2';
 import ForgotPassword3 from './Components/ForgotPassword3';
 import ForgotPassword4 from './Components/ForgotPassword4';
+import AboutUs from './Components/AboutUs';
 
 const App = () => {
   return (
@@ -47,6 +48,7 @@ const App = () => {
           <Route path="/forgotPassword3" element={<ForgotPassword3 />} />
           <Route path="/forgotPassword4" element={<ForgotPassword4 />} />
           <Route path="/ContactUs" element={<ContactUs />} />
+          <Route path="/AboutUs" element={<AboutUs />} />
         </Routes>
       </Router>
     </div>
