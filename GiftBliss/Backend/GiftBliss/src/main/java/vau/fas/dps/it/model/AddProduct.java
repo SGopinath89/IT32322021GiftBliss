@@ -45,8 +45,8 @@ public class AddProduct {
     @Min(value = 0, message = "Discount must be greater than or equal to 0")
     private Double discount;
 
-    @NotBlank(message = "Gender is mandatory")
-    private String gender;
+    @NotBlank(message = "Main category  is mandatory")
+    private String main_Category;
 
     private String size;
 
@@ -124,15 +124,19 @@ public class AddProduct {
         this.discount = discount;
     }
 
-    public String getGender() {
-        return gender;
-    }
+    
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+  
 
-    public String getSize() {
+	public String getMain_Category() {
+		return main_Category;
+	}
+
+	public void setMain_Category(String main_Category) {
+		this.main_Category = main_Category;
+	}
+
+	public String getSize() {
         return size;
     }
 

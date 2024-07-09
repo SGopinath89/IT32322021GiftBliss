@@ -13,7 +13,7 @@ const AdminAddProduct = () => {
     category: "",
     date: "",
     price: "",
-    gender: "",
+    mainCategory: "",
     size: "",
     count: "",
     image: ""
@@ -88,7 +88,7 @@ const AdminAddProduct = () => {
           category: "",
           date: "",
           price: "",
-          gender: "",
+          mainCategory: "",
           size: "",
           count: "",
           image: ""
@@ -100,6 +100,11 @@ const AdminAddProduct = () => {
     } catch (error) {
       alert('Failed to add product: ' + error.message);
     }
+  };
+
+  const handleImageRemove = () => {
+    setSelectedImage(null);
+    setItemDetails(prevState => ({ ...prevState, image: "" }));
   };
 
   return (
@@ -130,17 +135,22 @@ const AdminAddProduct = () => {
                 {!selectedImage && (
                   <div className="upload-box1">
                     <p>Drag & Drop your files or</p>
+                    <label htmlFor="fileInput" className="file-label">Choose File</label>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      style={{ display: "none" }}
+                      id="fileInput"
+                    />
                   </div>
                 )}
-                {selectedImage && <img src={selectedImage} alt="Selected" className="uploaded-image1" />}
-                <label htmlFor="fileInput" className="file-label">Choose File</label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  style={{ display: "none" }}
-                  id="fileInput"
-                />
+                {selectedImage && (
+                  <div className="selected-image-container">
+                    <img src={selectedImage} alt="Selected" className="uploaded-image1" />
+                    <button className="change-image-button" onClick={handleImageRemove}>Change Image</button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -189,6 +199,22 @@ const AdminAddProduct = () => {
                 <option value="Footwears">Footwears</option>
                 <option value="Watches">Watches</option>
                 <option value="Fragrance">Fragrance</option>
+                <option value="Haircare">Haircare</option>
+                <option value="Makeup">Makeup</option>
+                <option value="Skincare">Skincare</option>
+                <option value="Wellness">Wellness</option>
+                <option value="Bath">Bath</option>
+                <option value="Bedding">Bedding</option>
+                <option value="Furniture">Furniture</option>
+                <option value="Home Decor">Home Decor</option>
+                <option value="Kitchenware">Kitchenware</option>
+                <option value="Outdoor">Outdoor</option>
+                <option value="Action Figures">Action Figures</option>
+                <option value="Board Games">Board Games</option>
+                <option value="Educational Toys">Educational Toys</option>
+                <option value="Outdoor Toys">Outdoor Toys</option>
+                <option value="Puzzles">Puzzles</option>
+                <option value="Remote Control">Remote Control</option>
               </select>
             </div>
             <div className="form-group1">
@@ -213,16 +239,19 @@ const AdminAddProduct = () => {
               </div>
             </div>
             <div className="form-group1">
-              <label>Gender</label>
+              <label>Main Category</label>
               <select
-                name="gender"
-                value={itemDetails.gender}
+                name="main_Category"
+                value={itemDetails.main_Category}
                 onChange={handleInputChange}
               >
-                <option value="">--Gender--</option>
-                <option value="books">Books</option>
-                <option value="toy">Toy</option>
-                <option value="other">Other</option>
+                <option value="">--Main Category--</option>
+                <option value="books">Books & Stationery</option>
+                <option value="electronics">Electronics & Gadgets</option>
+                <option value="fashion">Fashion & Accessories</option>
+                <option value="health">Health & Beauty</option>
+                <option value="home">Home & Living</option>
+                <option value="toys">Toys & Games</option>
               </select>
             </div>
             <div className="form-group1">
@@ -246,8 +275,7 @@ const AdminAddProduct = () => {
             </div>
             <div className="form-actions1">
               <button onClick={handleAddProduct}>Add Product</button>
-              <button onClick={handleAddProduct}>save product</button>
-              {/* Add Save Product button or other actions here */}
+              {/* Add other actions or buttons here */}
             </div>
           </div>
           <div className="details1">
@@ -258,7 +286,7 @@ const AdminAddProduct = () => {
               {itemDetails.description}
             </p>
             <p>Product Date: {itemDetails.date}</p>
-            <p>Gender: {itemDetails.gender}</p>
+            <p>Main Category: {itemDetails.main_Category}</p>
             <p>Size: {itemDetails.size}</p>
             <p>Price: ${itemDetails.price}</p>
           </div>
@@ -270,3 +298,4 @@ const AdminAddProduct = () => {
 };
 
 export default AdminAddProduct;
+

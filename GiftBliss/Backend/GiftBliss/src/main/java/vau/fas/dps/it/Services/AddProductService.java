@@ -33,7 +33,7 @@ public class AddProductService {
         product.setDate(productDetails.getDate());
         product.setCount(productDetails.getCount());
         product.setDiscount(productDetails.getDiscount());
-        product.setGender(productDetails.getGender());
+        product.setMain_Category(productDetails.getMain_Category());
         product.setSize(productDetails.getSize());
        
 

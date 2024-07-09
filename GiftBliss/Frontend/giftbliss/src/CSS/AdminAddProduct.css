@@ -71,16 +71,26 @@
 
 .image-upload {
   width: 200px;
-  height: 180px;
+  height: 200px; /* Increased height to accommodate the image */
   border: 2px dashed #007bff;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  
   position: relative;
 }
+
+.uploaded-image1 {
+  max-width: 80%; /* Ensure image fits within the container */
+  max-height: 80%; /* Ensure image fits within the container */
+  object-fit: contain; /* Maintain aspect ratio */
+  margin-bottom: -70px;
+  margin-left: 20px;
+  margin-top:80px;
+}
+
 
 .image-upload.drag-active {
   background-color: #f0f0f0;
@@ -90,12 +100,7 @@
   cursor: pointer;
 }
 
-.uploaded-image1 {
-  width: 150px;
-  height: 150px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
+
 
 .file-label {
   display: inline-block;
