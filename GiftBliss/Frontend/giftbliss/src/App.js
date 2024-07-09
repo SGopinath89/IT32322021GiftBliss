@@ -22,6 +22,8 @@ import ForgotPassword2 from './Components/ForgotPassword2';
 import ForgotPassword3 from './Components/ForgotPassword3';
 import ForgotPassword4 from './Components/ForgotPassword4';
 import AboutUs from './Components/AboutUs';
+import Payment from './Components/Payment';
+import PaymentDetails from './Components/PaymentDetails'
 
 const App = () => {
   return (
@@ -34,7 +36,7 @@ const App = () => {
           <Route path="/:category" element={<CategoryPage />} />
           <Route path="/:category/:subcategory" element={<CategoryPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/product" element={<ProductPage />} />
+          <Route path="/product/:category/:productName" element={<ProductPage />} />
           <Route path="/add_product" element={<AdminAddProduct />} />
           <Route path="/products" element={<AdminProductPage />} />
           <Route path="/customers" element={<AdminCustomerPage />} />
@@ -49,6 +51,8 @@ const App = () => {
           <Route path="/forgotPassword4" element={<ForgotPassword4 />} />
           <Route path="/ContactUs" element={<ContactUs />} />
           <Route path="/AboutUs" element={<AboutUs />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/payment-details" element={<PaymentDetails />} />
         </Routes>
       </Router>
     </div>
