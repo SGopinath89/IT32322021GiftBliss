@@ -43,6 +43,20 @@ const PaymentDetails = () => {
     setPaymentDetails({ ...paymentDetails, [name]: value });
   };
 
+  const handleExpirationChange = (e) => {
+    let { value } = e.target;
+    if (value.length === 2 && paymentDetails.expiration.length < value.length) {
+      value = value + '/';
+    } else if (value.length === 5) {
+      const month = value.substring(0, 2);
+      const year = value.substring(3, 5);
+      if (Number(month) < 1 || Number(month) > 12 || !/^\d+$/.test(year)) {
+        return;
+      }
+    }
+    setPaymentDetails({ ...paymentDetails, expiration: value });
+  };
+
   // const handleSubmit = (e) => {
   //   e.preventDefault();
   //   axios.post('http://localhost:8080/api/payment', paymentDetails)
@@ -85,6 +99,13 @@ const PaymentDetails = () => {
 
   return (
     <div className='paymentDetails'>
+      {paymentSuccess && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>Payment successfully processed</h2>
+          </div>
+        </div>
+      )}
       <div className='leftSide'>
         <div className='payform'>
           {/* <div className='logo'>
@@ -95,11 +116,11 @@ const PaymentDetails = () => {
           </div>
 
           <div className='paymentDetailsform' >
-          {paymentSuccess ? (
+          {/* {paymentSuccess ? (
               <div className='successMessage'>
                 <h2>Payment successfully processed</h2>
               </div>
-            ) : (
+            ) : ( */}
             <form onSubmit={handleSubmit}>
               <div>
                 <h2>Payment details</h2>
@@ -175,7 +196,8 @@ const PaymentDetails = () => {
                     <div className='expiration-cvv'>
                       <div className='expiration'>
                         <label>Expiration</label>
-                        <input type='month' className="input-field" name='expiration' value={paymentDetails.expiration} onChange={handleInputChange} required></input>
+                        {/* <input type='month' className="input-field" name='expiration' value={paymentDetails.expiration} onChange={handleInputChange} required></input> */}
+                        <input type='text' className="input-field" name='expiration' value={paymentDetails.expiration} onChange={handleExpirationChange} maxLength="5" placeholder="MM/YY" required/>
                       </div>
                       <div className='cvv'>
                         <label>CVV</label>
@@ -195,7 +217,7 @@ const PaymentDetails = () => {
                 </Box> 
               </div>
             </form>
-            )}
+            {/* )} */}
           </div>
         </div>
       </div>
